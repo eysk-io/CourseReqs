@@ -10,6 +10,7 @@
     "test": "jest --forceExit --detectOpenHandles  --silent"
   },
   "dependencies": {
+    "@types/mongodb": "^4.0.7",
     "mongoose": "^6.0.9",
     "next": "11.1.2",
     "next-connect": "^0.10.2",
