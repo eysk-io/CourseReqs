@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose"
+import { Schema, model, models } from "mongoose"
 
 interface Course {
     subject: string
@@ -77,4 +77,4 @@ courseSchema.index(
     { unique: true }
 )
 
-export const Course = model('course', courseSchema)
+export default models.Course || model('Course', courseSchema)

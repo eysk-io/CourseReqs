@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, models } from 'mongoose'
 
 interface School {
     name: string
@@ -14,4 +14,4 @@ const schoolSchema = new Schema<School>({
     }
 })
 
-export const School = model('school', schoolSchema)
+export default models.School || model('School', schoolSchema)

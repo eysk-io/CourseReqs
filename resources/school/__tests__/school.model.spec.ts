@@ -1,4 +1,4 @@
-import { School } from "../school.model";
+import School from "../school.model";
 
 describe("School model", () => {
     describe("schema", () => {
