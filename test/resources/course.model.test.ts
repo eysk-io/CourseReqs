@@ -1,4 +1,4 @@
-import Course from "../course.model";
+import Course from "../../resources/course/course.model";
 
 describe("course model", () => {
     describe("schema", () => {
