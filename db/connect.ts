@@ -1,20 +1,16 @@
-import { Db, MongoClient } from 'mongodb'
+import mongoose from 'mongoose'
 
 global.mongo = global.mongo || {}
 
-export const connectToDB = async () => {
-    if (!global.mongo.client) {
-        global.mongo.client = await new MongoClient(process.env.DATABASE_URL)
-
-        console.log('Connecting to DB')
-        await global.mongo.client.connect()
+export const connectToDB = async (): Promise<void> => {
+    if (global.mongo.isConnected) {
         console.log('Connected to DB')
+        return
     }
 
-    const db: Db = await global.mongo.client.db('course_reqs_db')
+    console.log('Connecting to DB')
+    const db = await mongoose.connect(process.env.DATABASE_URL)
+    console.log('Connected to DB')
 
-    return {
-        db,
-        dbClient: global.mongo.client
-    }
+    global.mongo.isConnected = db.connections[0].readyState
 }
