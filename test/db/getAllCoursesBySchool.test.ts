@@ -36,9 +36,17 @@ describe('getAllCoursesBySchool', () => {
                 school: 'uBc'
             }
         }
-        const res = await getAllCoursesBySchool(req, {})
-        expect(res.data[0]._id.toString()).toBe(course._id.toString())
-        expect.assertions(1)
+        const res = {
+            status(status) {
+                expect(status).toBe(200);
+                return this;
+            },
+            json(result) {
+                expect(result.data[0]._id.toString()).toBe(course._id.toString());
+            }
+        }
+        await getAllCoursesBySchool(req, res)
+        expect.assertions(2)
     })
     it('find all courses by school with no pre- or co-reqs', async () => {
         const school = await School.create({ name: 'UBC' })
@@ -59,9 +67,17 @@ describe('getAllCoursesBySchool', () => {
                 school: school.name
             }
         }
-        const res = await getAllCoursesBySchool(req, {})
-        expect(res.data[0]._id.toString()).toBe(course._id.toString())
-        expect.assertions(1)
+        const res = {
+            status(status) {
+                expect(status).toBe(200);
+                return this;
+            },
+            json(result) {
+                expect(result.data[0]._id.toString()).toBe(course._id.toString());
+            }
+        }
+        await getAllCoursesBySchool(req, res)
+        expect.assertions(2)
     })
     it('404 if school not found', async () => {
         await Course.create({
@@ -100,8 +116,16 @@ describe('getAllCoursesBySchool', () => {
                 school: school.name
             }
         }
-        const res = await getAllCoursesBySchool(req, {})
-        expect(res.data).toEqual([])
-        expect.assertions(1)
+        const res = {
+            status(status) {
+                expect(status).toBe(200);
+                return this;
+            },
+            json(result) {
+                expect(result.data).toEqual([])
+            }
+        }
+        await getAllCoursesBySchool(req, res)
+        expect.assertions(2)
     })
 })
