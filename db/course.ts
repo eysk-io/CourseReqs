@@ -1,7 +1,12 @@
+import { NextApiResponse } from "next"
 import Course from "../resources/course/course.model"
 import School from "../resources/school/school.model"
+import { CourseReqsApiRequest } from "../types"
 
-export const getAllCoursesBySchool = async (req, res) => {
+export const getAllCoursesBySchool = async (
+    req: CourseReqsApiRequest,
+    res: NextApiResponse
+): Promise<void> => {
     try {
         const schoolDoc = await School
             .findOne({
@@ -23,7 +28,10 @@ export const getAllCoursesBySchool = async (req, res) => {
     }
 }
 
-export const getAllCoursesBySchoolAndSubject = async (req, res) => {
+export const getAllCoursesBySchoolAndSubject = async (
+    req: CourseReqsApiRequest,
+    res: NextApiResponse
+): Promise<void> => {
     try {
         const schoolName = (req.query.school).toUpperCase();
         const subject = (req.query.subject).toUpperCase();
