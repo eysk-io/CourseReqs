@@ -22,3 +22,32 @@ export const getAllCoursesBySchool = async (req, res) => {
         res.status(400).end()
     }
 }
+
+export const getAllCoursesBySchoolAndSubject = async (req, res) => {
+    try {
+        const schoolName = (req.query.school).toUpperCase();
+        const subject = (req.query.subject).toUpperCase();
+        const schoolDoc = await School
+            .findOne({ name: schoolName })
+            .lean()
+            .exec();
+        if (!schoolDoc) {
+            return res.status(404).end();
+        }
+        const schoolId = schoolDoc.name
+        const doc = await Course
+            .find({
+                school: schoolId,
+                subject: subject
+            })
+            .lean()
+            .exec();
+        if (!doc) {
+            return res.status(404).end();
+        }
+        return res.status(200).json({ data: doc });
+    } catch (e) {
+        console.error(e);
+        res.status(400).end();
+    }
+}
