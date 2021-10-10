@@ -1,4 +1,5 @@
 import Course from "../../resources/course/course.model";
+import { courseReqsSchema as CourseReqsSchema } from '../../resources/course/courseReqs.model'
 
 describe("course model", () => {
     describe("schema", () => {
@@ -55,21 +56,21 @@ describe("course model", () => {
         test("pre-requisites", () => {
             const preRequisites = Course.schema.obj.preRequisites;
             expect(preRequisites).toEqual({
-                type: [],
+                type: [CourseReqsSchema],
                 required: true
             });
         });
         test("co-requisites", () => {
             const coRequisites = Course.schema.obj.coRequisites;
             expect(coRequisites).toEqual({
-                type: [],
+                type: [CourseReqsSchema],
                 required: true
             });
         });
         test("equivalencies", () => {
             const equivalencies = Course.schema.obj.equivalencies;
             expect(equivalencies).toEqual({
-                type: [],
+                type: [CourseReqsSchema],
                 required: true
             });
         });

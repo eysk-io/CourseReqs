@@ -1,15 +1,19 @@
 import { Schema, model, models } from "mongoose"
+import {
+    courseReqsSchema as CourseReqsSchema,
+    CourseReqs
+} from './courseReqs.model'
 
-interface Course {
+type Course = {
     subject: string
     code: number
     title: string
     description: string
     school: string
     credits: string
-    preRequisites: [Course]
-    coRequisites: [any]
-    equivalencies: [any]
+    preRequisites: [CourseReqs]
+    coRequisites: [CourseReqs]
+    equivalencies: [CourseReqs]
     notes: string
 }
 
@@ -54,15 +58,15 @@ const courseSchema = new Schema<Course>(
         // { advancedCredit: [String] } -> i.e. { advancedCredit: ["MATH 103"] }
         // and any nested combination of these
         preRequisites: {
-            type: [],
+            type: [CourseReqsSchema],
             required: true
         },
         coRequisites: {
-            type: [],
+            type: [CourseReqsSchema],
             required: true
         },
         equivalencies: {
-            type: [],
+            type: [CourseReqsSchema],
             required: true
         },
         notes: {
