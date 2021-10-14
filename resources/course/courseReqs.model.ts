@@ -3,7 +3,7 @@ import { Schema } from "mongoose"
 export type CourseReqs =
     | [string]
     | {
-        oneOf?: [CourseReqs] | [string]
+        oneOf?: [CourseReqs]
         scoreOf?: number
         metric?: string
         courses?: [string]
