@@ -1,13 +1,18 @@
 import { Schema } from "mongoose"
+import { Course } from "./course.model"
+
+interface CourseReqsArray extends Array<CourseReqsArray | CourseReqs> { }
 
 export type CourseReqs =
-    | [string]
+    | Course
+    | CourseReqsArray
     | {
-        oneOf?: [CourseReqs]
+        oneOf?: CourseReqs[]
         scoreOf?: number
         metric?: string
-        courses?: [string]
-        advancedCredit?: [string]
+        courses?: CourseReqs[]
+        advancedCredit?: CourseReqs[]
+        recommended?: CourseReqs[]
     }
 
 export const courseReqsSchema = new Schema<CourseReqs>(
@@ -25,11 +30,15 @@ export const courseReqsSchema = new Schema<CourseReqs>(
             required: false
         },
         courses: {
-            type: [String],
+            type: [],
             required: false
         },
         advancedCredit: {
-            type: [String],
+            type: [],
+            required: false
+        },
+        recommended: {
+            type: [],
             required: false
         }
     }
