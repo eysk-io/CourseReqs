@@ -871,6 +871,7 @@ describe("getCourse", () => {
         expect(result).toEqual(expectedCourse)
         expect.assertions(1)
     })
+
     it("returns the correct courses with advancedCredit pre-reqs", async () => {
         const school = await School.create({ name: "UBC" })
         const math221 = await Course.create({
