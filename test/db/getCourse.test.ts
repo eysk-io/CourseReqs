@@ -17,7 +17,7 @@ describe("getCourse", () => {
     })
 
     it("returns the correct course no matter the request parameter/query's letter case", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const cpsc107 = await Course.create({
             subject: "CPSC",
             code: 107,
@@ -29,7 +29,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none"
-        });
+        })
         const expectedCourse = {
             subject: "CPSC",
             code: 107,
@@ -42,29 +42,19 @@ describe("getCourse", () => {
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: cpsc107._id
-        };
-        const req = {
-            query: {
-                school: "ubC",
-                subject: "cPsC",
-                courseCode: cpsc107.code
-            }
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: cpsc107._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
+
+        const schoolName = "ubC"
+        const subject = "cPsC"
+        const courseCode = cpsc107.code.toString()
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
     })
+
     it("returns the correct course with a nested pre-req", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const cpsc107 = await Course.create({
             subject: "CPSC",
             code: 107,
@@ -76,7 +66,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none"
-        });
+        })
         const cpsc103 = await Course.create({
             subject: "CPSC",
             code: 103,
@@ -109,60 +99,50 @@ describe("getCourse", () => {
                     equivalencies: [],
                     notes: "none",
                     __v: 0,
-                    _id: cpsc103._id
+                    _id: cpsc103._id.toString()
                 }
             ],
             coRequisites: [],
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: cpsc107._id
-        };
-        const req = {
-            query: {
-                school: school.name,
-                subject: cpsc107.subject,
-                courseCode: cpsc107.code
-            }
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: cpsc107._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
+
+        const schoolName = school.name
+        const subject = cpsc107.subject
+        const courseCode = cpsc107.code.toString()
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
+
     it("returns the correct courses with multiple levels of nested pre-reqs", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const cpsc340 = await Course.create({
             subject: "CPSC",
             code: 340,
             school: school.name,
             title: "Machine Learning and Data Mining",
-            description: "Models of algorithms for dimensionality reduction, nonlinear regression, classification, clustering and unsupervised learning; applications to computer graphics, computer games, bio-informatics, information retrieval, e-commerce, databases, computer vision and artificial intelligence.",
+            description: "Models of algorithms for dimensionality reduction, nonlinear regression, classification, clustering and unsupervised learning applications to computer graphics, computer games, bio-informatics, information retrieval, e-commerce, databases, computer vision and artificial intelligence.",
             credits: "3",
             preRequisites: ["CPSC 221"],
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const cpsc221 = await Course.create({
             subject: "CPSC",
             code: 221,
             school: school.name,
             title: "Basic Algorithms and Data Structures",
-            description: "Design and analysis of basic algorithms and data structures; algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
+            description: "Design and analysis of basic algorithms and data structures algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
             credits: "4",
             preRequisites: ["CPSC 210"],
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const cpsc210 = await Course.create({
             subject: "CPSC",
             code: 210,
@@ -174,7 +154,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const cpsc110 = await Course.create({
             subject: "CPSC",
             code: 110,
@@ -186,13 +166,13 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const expectedCourse = {
             subject: "CPSC",
             code: 340,
             school: school.name,
             title: "Machine Learning and Data Mining",
-            description: "Models of algorithms for dimensionality reduction, nonlinear regression, classification, clustering and unsupervised learning; applications to computer graphics, computer games, bio-informatics, information retrieval, e-commerce, databases, computer vision and artificial intelligence.",
+            description: "Models of algorithms for dimensionality reduction, nonlinear regression, classification, clustering and unsupervised learning applications to computer graphics, computer games, bio-informatics, information retrieval, e-commerce, databases, computer vision and artificial intelligence.",
             credits: "3",
             preRequisites: [
                 {
@@ -200,7 +180,7 @@ describe("getCourse", () => {
                     code: 221,
                     school: school.name,
                     title: "Basic Algorithms and Data Structures",
-                    description: "Design and analysis of basic algorithms and data structures; algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
+                    description: "Design and analysis of basic algorithms and data structures algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
                     credits: "4",
                     preRequisites: [
                         {
@@ -223,50 +203,40 @@ describe("getCourse", () => {
                                     equivalencies: [],
                                     notes: "none",
                                     __v: 0,
-                                    _id: cpsc110._id
+                                    _id: cpsc110._id.toString()
                                 }
                             ],
                             coRequisites: [],
                             equivalencies: [],
                             notes: "none",
                             __v: 0,
-                            _id: cpsc210._id
+                            _id: cpsc210._id.toString()
                         }
                     ],
                     coRequisites: [],
                     equivalencies: [],
                     notes: "none",
                     __v: 0,
-                    _id: cpsc221._id
+                    _id: cpsc221._id.toString()
                 }
             ],
             coRequisites: [],
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: cpsc340._id
-        };
-        const req = {
-            query: {
-                school: school.name,
-                subject: cpsc340.subject,
-                courseCode: cpsc340.code
-            }
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: cpsc340._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
+
+        const schoolName = school.name
+        const subject = cpsc340.subject
+        const courseCode = cpsc340.code
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
+
     it("returns the correct courses with oneOf pre-reqs", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const cpsc210 = await Course.create({
             subject: "CPSC",
             code: 210,
@@ -284,7 +254,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const cpsc110 = await Course.create({
             subject: "CPSC",
             code: 110,
@@ -296,7 +266,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const cpsc107 = await Course.create({
             subject: "CPSC",
             code: 107,
@@ -308,7 +278,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const cpsc103 = await Course.create({
             subject: "CPSC",
             code: 103,
@@ -320,7 +290,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const expectedCourse = {
             subject: "CPSC",
             code: 210,
@@ -343,7 +313,7 @@ describe("getCourse", () => {
                             equivalencies: [],
                             notes: "none",
                             __v: 0,
-                            _id: cpsc110._id
+                            _id: cpsc110._id.toString()
                         },
                         {
                             subject: "CPSC",
@@ -365,14 +335,14 @@ describe("getCourse", () => {
                                     equivalencies: [],
                                     notes: "none",
                                     __v: 0,
-                                    _id: cpsc103._id
+                                    _id: cpsc103._id.toString()
                                 }
                             ],
                             coRequisites: [],
                             equivalencies: [],
                             notes: "none",
                             __v: 0,
-                            _id: cpsc107._id
+                            _id: cpsc107._id.toString()
                         }
                     ]
                 }
@@ -381,29 +351,19 @@ describe("getCourse", () => {
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: cpsc210._id
-        };
-        const req = {
-            query: {
-                school: school.name,
-                subject: cpsc210.subject,
-                courseCode: cpsc210.code
-            }
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: cpsc210._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
+
+        const schoolName = school.name
+        const subject = cpsc210.subject
+        const courseCode = cpsc210.code
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
+
     it("returns the correct courses with oneOf co-reqs", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const phys158 = await Course.create({
             subject: "PHYS",
             code: 158,
@@ -422,7 +382,7 @@ describe("getCourse", () => {
             ],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const phys157 = await Course.create({
             subject: "PHYS",
             code: 157,
@@ -434,7 +394,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const expectedCourse = {
             subject: "PHYS",
             code: 158,
@@ -455,7 +415,7 @@ describe("getCourse", () => {
                     equivalencies: [],
                     notes: "none",
                     __v: 0,
-                    _id: phys157._id
+                    _id: phys157._id.toString()
                 },
             ],
             coRequisites: [
@@ -469,29 +429,19 @@ describe("getCourse", () => {
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: phys158._id
-        };
-        const req = {
-            query: {
-                school: school.name,
-                subject: phys158.subject,
-                courseCode: phys158.code
-            }
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: phys158._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
+
+        const schoolName = school.name
+        const subject = phys158.subject
+        const courseCode = phys158.code
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
+
     it("returns the correct courses with scoreOf pre-reqs", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const math221 = await Course.create({
             subject: "MATH",
             code: 221,
@@ -516,7 +466,7 @@ describe("getCourse", () => {
             ],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const phys157 = await Course.create({
             subject: "PHYS",
             code: 157,
@@ -528,7 +478,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const math101 = await Course.create({
             subject: "MATH",
             code: 101,
@@ -540,7 +490,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const math103 = await Course.create({
             subject: "MATH",
             code: 103,
@@ -552,14 +502,8 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
-        const req = {
-            query: {
-                school: school.name,
-                subject: math221.subject,
-                courseCode: math221.code
-            }
-        };
+        })
+
         const expectedCourse = {
             subject: "MATH",
             code: 221,
@@ -584,7 +528,7 @@ describe("getCourse", () => {
                             equivalencies: [],
                             notes: "none",
                             __v: 0,
-                            _id: phys157._id
+                            _id: phys157._id.toString()
                         }
                     ]
                 },
@@ -600,7 +544,7 @@ describe("getCourse", () => {
                     equivalencies: [],
                     notes: "none",
                     __v: 0,
-                    _id: math101._id
+                    _id: math101._id.toString()
                 },
                 {
                     subject: "MATH",
@@ -614,7 +558,7 @@ describe("getCourse", () => {
                     equivalencies: [],
                     notes: "none",
                     __v: 0,
-                    _id: math103._id
+                    _id: math103._id.toString()
                 }
             ],
             coRequisites: [
@@ -624,22 +568,19 @@ describe("getCourse", () => {
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: math221._id
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: math221._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
+
+        const schoolName = school.name
+        const subject = math221.subject
+        const courseCode = math221.code
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
+
     it("returns the correct courses with scoreOf requirements within oneOf requirements", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const math221 = await Course.create({
             subject: "MATH",
             code: 221,
@@ -668,7 +609,7 @@ describe("getCourse", () => {
             ],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const phys157 = await Course.create({
             subject: "PHYS",
             code: 157,
@@ -680,7 +621,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const math101 = await Course.create({
             subject: "MATH",
             code: 101,
@@ -692,7 +633,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const math103 = await Course.create({
             subject: "MATH",
             code: 103,
@@ -704,14 +645,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
-        const req = {
-            query: {
-                school: school.name,
-                subject: math221.subject,
-                courseCode: math221.code
-            }
-        };
+        })
         const expectedCourse = {
             subject: "MATH",
             code: 221,
@@ -738,7 +672,7 @@ describe("getCourse", () => {
                                     equivalencies: [],
                                     notes: "none",
                                     __v: 0,
-                                    _id: phys157._id
+                                    _id: phys157._id.toString()
                                 }
                             ]
                         },
@@ -754,7 +688,7 @@ describe("getCourse", () => {
                             equivalencies: [],
                             notes: "none",
                             __v: 0,
-                            _id: math101._id
+                            _id: math101._id.toString()
                         },
                     ]
                 },
@@ -770,7 +704,7 @@ describe("getCourse", () => {
                     equivalencies: [],
                     notes: "none",
                     __v: 0,
-                    _id: math103._id
+                    _id: math103._id.toString()
                 }
             ],
             coRequisites: [
@@ -780,22 +714,19 @@ describe("getCourse", () => {
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: math221._id
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: math221._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
+
+        const schoolName = school.name
+        const subject = math221.subject
+        const courseCode = math221.code
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
+
     it("returns the correct courses with oneOf requirements within scoreOf requirements", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const math221 = await Course.create({
             subject: "MATH",
             code: 221,
@@ -824,7 +755,7 @@ describe("getCourse", () => {
             ],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const phys157 = await Course.create({
             subject: "PHYS",
             code: 157,
@@ -836,7 +767,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const math101 = await Course.create({
             subject: "MATH",
             code: 101,
@@ -848,7 +779,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const math103 = await Course.create({
             subject: "MATH",
             code: 103,
@@ -860,14 +791,8 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
-        const req = {
-            query: {
-                school: school.name,
-                subject: math221.subject,
-                courseCode: math221.code
-            }
-        };
+        })
+
         const expectedCourse = {
             subject: "MATH",
             code: 221,
@@ -894,7 +819,7 @@ describe("getCourse", () => {
                                     equivalencies: [],
                                     notes: "none",
                                     __v: 0,
-                                    _id: math101._id
+                                    _id: math101._id.toString()
                                 },
                                 {
                                     subject: "PHYS",
@@ -908,7 +833,7 @@ describe("getCourse", () => {
                                     equivalencies: [],
                                     notes: "none",
                                     __v: 0,
-                                    _id: phys157._id
+                                    _id: phys157._id.toString()
                                 },
                             ]
                         }
@@ -926,7 +851,7 @@ describe("getCourse", () => {
                     equivalencies: [],
                     notes: "none",
                     __v: 0,
-                    _id: math103._id
+                    _id: math103._id.toString()
                 }
             ],
             coRequisites: [
@@ -936,22 +861,18 @@ describe("getCourse", () => {
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: math221._id
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: math221._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
+
+        const schoolName = school.name
+        const subject = math221.subject
+        const courseCode = math221.code
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
     it("returns the correct courses with advancedCredit pre-reqs", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const math221 = await Course.create({
             subject: "MATH",
             code: 221,
@@ -984,7 +905,7 @@ describe("getCourse", () => {
             ],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const phys157 = await Course.create({
             subject: "PHYS",
             code: 157,
@@ -996,7 +917,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const math101 = await Course.create({
             subject: "MATH",
             code: 101,
@@ -1008,7 +929,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const math103 = await Course.create({
             subject: "MATH",
             code: 103,
@@ -1020,14 +941,8 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
-        const req = {
-            query: {
-                school: school.name,
-                subject: math221.subject,
-                courseCode: math221.code
-            }
-        };
+        })
+
         const expectedCourse = {
             subject: "MATH",
             code: 221,
@@ -1054,7 +969,7 @@ describe("getCourse", () => {
                                     equivalencies: [],
                                     notes: "none",
                                     __v: 0,
-                                    _id: math101._id
+                                    _id: math101._id.toString()
                                 },
                                 {
                                     subject: "PHYS",
@@ -1068,7 +983,7 @@ describe("getCourse", () => {
                                     equivalencies: [],
                                     notes: "none",
                                     __v: 0,
-                                    _id: phys157._id
+                                    _id: phys157._id.toString()
                                 },
                             ]
                         }
@@ -1088,7 +1003,7 @@ describe("getCourse", () => {
                             equivalencies: [],
                             notes: "none",
                             __v: 0,
-                            _id: math103._id
+                            _id: math103._id.toString()
                         }
                     ]
                 }
@@ -1100,22 +1015,19 @@ describe("getCourse", () => {
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: math221._id
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: math221._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
+
+        const schoolName = school.name
+        const subject = math221.subject
+        const courseCode = math221.code
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
+
     it("returns the correct courses with multiple levels of pre-reqs within advancedCredit requirements", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const math221 = await Course.create({
             subject: "MATH",
             code: 221,
@@ -1148,7 +1060,7 @@ describe("getCourse", () => {
             ],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const cpsc210 = await Course.create({
             subject: "CPSC",
             code: 210,
@@ -1160,7 +1072,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const cpsc110 = await Course.create({
             subject: "CPSC",
             code: 110,
@@ -1172,7 +1084,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const phys157 = await Course.create({
             subject: "PHYS",
             code: 157,
@@ -1184,7 +1096,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
+        })
         const math101 = await Course.create({
             subject: "MATH",
             code: 101,
@@ -1196,14 +1108,8 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none",
-        });
-        const req = {
-            query: {
-                school: school.name,
-                subject: math221.subject,
-                courseCode: math221.code
-            }
-        };
+        })
+
         const expectedCourse = {
             subject: "MATH",
             code: 221,
@@ -1230,7 +1136,7 @@ describe("getCourse", () => {
                                     equivalencies: [],
                                     notes: "none",
                                     __v: 0,
-                                    _id: math101._id
+                                    _id: math101._id.toString()
                                 },
                                 {
                                     subject: "PHYS",
@@ -1244,7 +1150,7 @@ describe("getCourse", () => {
                                     equivalencies: [],
                                     notes: "none",
                                     __v: 0,
-                                    _id: phys157._id
+                                    _id: phys157._id.toString()
                                 },
                             ]
                         }
@@ -1272,14 +1178,14 @@ describe("getCourse", () => {
                                     equivalencies: [],
                                     notes: "none",
                                     __v: 0,
-                                    _id: cpsc110._id
+                                    _id: cpsc110._id.toString()
                                 }
                             ],
                             coRequisites: [],
                             equivalencies: [],
                             notes: "none",
                             __v: 0,
-                            _id: cpsc210._id
+                            _id: cpsc210._id.toString()
                         }
                     ]
                 }
@@ -1291,22 +1197,19 @@ describe("getCourse", () => {
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: math221._id
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: math221._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
+
+        const schoolName = school.name
+        const subject = math221.subject
+        const courseCode = math221.code
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
+
     it("returns the correct courses with pre-reqs that don't exist within the db", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const math221 = await Course.create({
             subject: "MATH",
             code: 221,
@@ -1329,14 +1232,8 @@ describe("getCourse", () => {
             ],
             equivalencies: [],
             notes: "none",
-        });
-        const req = {
-            query: {
-                school: school.name,
-                subject: math221.subject,
-                courseCode: math221.code
-            }
-        };
+        })
+
         const expectedCourse = {
             subject: "MATH",
             code: 221,
@@ -1373,22 +1270,19 @@ describe("getCourse", () => {
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: math221._id
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: math221._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
+
+        const schoolName = school.name
+        const subject = math221.subject
+        const courseCode = math221.code
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
+
     it("returns the correct courses with recommended prerequisites", async () => {
-        const school = await School.create({ name: "UBC" });
+        const school = await School.create({ name: "UBC" })
         const cpsc107 = await Course.create({
             subject: "CPSC",
             code: 107,
@@ -1406,7 +1300,7 @@ describe("getCourse", () => {
             coRequisites: [],
             equivalencies: [],
             notes: "none"
-        });
+        })
         const expectedCourse = {
             subject: "CPSC",
             code: 107,
@@ -1425,25 +1319,14 @@ describe("getCourse", () => {
             equivalencies: [],
             notes: "none",
             __v: 0,
-            _id: cpsc107._id
-        };
-        const req = {
-            query: {
-                school: school.name,
-                subject: cpsc107.subject,
-                courseCode: cpsc107.code
-            }
-        };
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourse);
-            }
+            _id: cpsc107._id.toString()
         }
-        await getCourse(req, res);
-        expect.assertions(2);
-    });
-});
+
+        const schoolName = school.name
+        const subject = cpsc107.subject
+        const courseCode = cpsc107.code
+        const result = await getCourse(schoolName, subject, courseCode)
+        expect(result).toEqual(expectedCourse)
+        expect.assertions(1)
+    })
+})

@@ -9,6 +9,19 @@ const handler = nc<NextApiRequest, NextApiResponse>({
 })
 
 handler.use(middleware)
-handler.get(async (req, res) => await getCourse(req, res))
+handler.get(async (req, res) => {
+    const { school, subject, courseCode } = req.query
+    if (
+        typeof school === "string" &&
+        typeof subject === "string" &&
+        typeof courseCode === "string"
+    ) {
+        const courseInfo = await getCourse(school, subject, courseCode)
+        if (!courseInfo) {
+            return res.status(400).end()
+        }
+        return res.json({ data: courseInfo })
+    }
+})
 
 export default handler
