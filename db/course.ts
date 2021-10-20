@@ -4,28 +4,25 @@ import School from "../resources/school/school.model"
 import { CourseReqsApiRequest } from "../types"
 import { getCourseHelper } from "../utils"
 
-export const getAllCoursesBySchool = async (
-    req: CourseReqsApiRequest,
-    res: NextApiResponse
-): Promise<void> => {
+export const getAllCoursesBySchool = async (schoolName: string): Promise<any> => {
     try {
         const schoolDoc = await School
             .findOne({
-                name: (req.query.school).toUpperCase()
+                name: schoolName.toUpperCase()
             })
             .lean()
             .exec()
         if (!schoolDoc) {
-            return res.status(404).end()
+            return null
         }
         const doc = await Course
             .find({ school: schoolDoc.name })
             .lean()
             .exec()
-        return res.status(200).json({ data: doc })
+        return JSON.parse(JSON.stringify(doc))
     } catch (e) {
         console.error(e)
-        res.status(400).end()
+        return null
     }
 }
 

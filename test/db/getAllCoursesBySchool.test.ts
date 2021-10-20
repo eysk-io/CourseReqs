@@ -17,7 +17,7 @@ describe('getAllCoursesBySchool', () => {
         await dbHandler.closeDatabase()
     })
 
-    it('ensure parameters are case agnostic', async () => {
+    it("returns the correct courses no matter the argument's letter case", async () => {
         const school = await School.create({ name: 'UBC' })
         const course = await Course.create({
             subject: 'CPSC',
@@ -31,24 +31,14 @@ describe('getAllCoursesBySchool', () => {
             equivalencies: [],
             notes: 'none'
         })
-        const req = {
-            query: {
-                school: 'uBc'
-            }
-        }
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data[0]._id.toString()).toBe(course._id.toString());
-            }
-        }
-        await getAllCoursesBySchool(req, res)
-        expect.assertions(2)
+
+        const schoolName = 'uBc'
+        const result = await getAllCoursesBySchool(schoolName)
+        expect(result[0]._id.toString()).toBe(course._id.toString())
+        expect.assertions(1)
     })
-    it('find all courses by school with no pre- or co-reqs', async () => {
+
+    it('returns all courses by school with no pre- or co-reqs', async () => {
         const school = await School.create({ name: 'UBC' })
         const course = await Course.create({
             subject: 'CPSC',
@@ -62,24 +52,14 @@ describe('getAllCoursesBySchool', () => {
             equivalencies: [],
             notes: 'none'
         })
-        const req = {
-            query: {
-                school: school.name
-            }
-        }
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data[0]._id.toString()).toBe(course._id.toString());
-            }
-        }
-        await getAllCoursesBySchool(req, res)
-        expect.assertions(2)
+
+        const schoolName = school.name
+        const result = await getAllCoursesBySchool(schoolName)
+        expect(result[0]._id.toString()).toBe(course._id.toString())
+        expect.assertions(1)
     })
-    it('404 if school not found', async () => {
+
+    it('returns null if school not found', async () => {
         await Course.create({
             subject: 'CPSC',
             code: 110,
@@ -92,40 +72,17 @@ describe('getAllCoursesBySchool', () => {
             equivalencies: [],
             notes: 'none'
         })
-        const req = {
-            query: {
-                school: 'UBC'
-            }
-        }
-        const res = {
-            status(status) {
-                expect(status).toBe(404)
-                return this
-            },
-            end() {
-                expect(true).toBe(true)
-            }
-        }
-        await getAllCoursesBySchool(req, res)
-        expect.assertions(2)
+        const schoolName = 'UBC'
+        const result = await getAllCoursesBySchool(schoolName)
+        expect(result).toEqual(null)
+        expect.assertions(1)
     })
-    it('return empty list of courses if no courses available for school', async () => {
+
+    it('returns an empty list of courses if no courses are available for the school', async () => {
         const school = await School.create({ name: 'UBC' })
-        const req = {
-            query: {
-                school: school.name
-            }
-        }
-        const res = {
-            status(status) {
-                expect(status).toBe(200);
-                return this;
-            },
-            json(result) {
-                expect(result.data).toEqual([])
-            }
-        }
-        await getAllCoursesBySchool(req, res)
-        expect.assertions(2)
+        const schoolName = school.name
+        const result = await getAllCoursesBySchool(schoolName)
+        expect(result).toEqual([])
+        expect.assertions(1)
     })
 })
