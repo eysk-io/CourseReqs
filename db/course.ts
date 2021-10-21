@@ -1,7 +1,5 @@
-import { NextApiResponse } from "next"
 import Course from "../resources/course/course.model"
 import School from "../resources/school/school.model"
-import { CourseReqsApiRequest } from "../types"
 import { getCourseHelper } from "../utils"
 
 export const getAllCoursesBySchool = async (schoolName: string): Promise<any> => {
@@ -27,34 +25,34 @@ export const getAllCoursesBySchool = async (schoolName: string): Promise<any> =>
 }
 
 export const getAllCoursesBySchoolAndSubject = async (
-    req: CourseReqsApiRequest,
-    res: NextApiResponse
-): Promise<void> => {
+    school: string,
+    subject: string
+): Promise<any> => {
     try {
-        const schoolName = (req.query.school).toUpperCase();
-        const subject = (req.query.subject).toUpperCase();
+        const schoolName = school.toUpperCase()
+        const subjectName = subject.toUpperCase()
         const schoolDoc = await School
             .findOne({ name: schoolName })
             .lean()
             .exec();
         if (!schoolDoc) {
-            return res.status(404).end();
+            return null
         }
         const schoolId = schoolDoc.name
         const doc = await Course
             .find({
                 school: schoolId,
-                subject: subject
+                subject: subjectName
             })
             .lean()
-            .exec();
+            .exec()
         if (!doc) {
-            return res.status(404).end();
+            return null
         }
-        return res.status(200).json({ data: doc });
+        return JSON.parse(JSON.stringify(doc))
     } catch (e) {
-        console.error(e);
-        res.status(400).end();
+        console.error(e)
+        return null
     }
 }
 

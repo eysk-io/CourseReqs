@@ -16,7 +16,7 @@ describe('getAllCoursesBySchoolAndSubject', () => {
         await dbHandler.closeDatabase()
     })
 
-    it('get list of courses by school and name', async () => {
+    it("returns a list of courses by school and name", async () => {
         const schoolModel = await School.create({ name: 'UBC' })
         const cpsc110 = await Course.create({
             subject: 'CPSC',
@@ -91,7 +91,7 @@ describe('getAllCoursesBySchoolAndSubject', () => {
                 equivalencies: [],
                 notes: 'none',
                 __v: 0,
-                _id: cpsc110._id
+                _id: cpsc110._id.toString()
             },
             {
                 subject: 'CPSC',
@@ -105,7 +105,7 @@ describe('getAllCoursesBySchoolAndSubject', () => {
                 equivalencies: [],
                 notes: 'none',
                 __v: 0,
-                _id: cpsc111._id
+                _id: cpsc111._id.toString()
             },
             {
                 subject: 'CPSC',
@@ -119,7 +119,7 @@ describe('getAllCoursesBySchoolAndSubject', () => {
                 equivalencies: [],
                 notes: 'none',
                 __v: 0,
-                _id: cpsc112._id
+                _id: cpsc112._id.toString()
             },
             {
                 subject: 'CPSC',
@@ -133,7 +133,7 @@ describe('getAllCoursesBySchoolAndSubject', () => {
                 equivalencies: [],
                 notes: 'none',
                 __v: 0,
-                _id: cpsc113._id
+                _id: cpsc113._id.toString()
             },
             {
                 subject: 'CPSC',
@@ -147,28 +147,18 @@ describe('getAllCoursesBySchoolAndSubject', () => {
                 equivalencies: [],
                 notes: 'none',
                 __v: 0,
-                _id: cpsc114._id
+                _id: cpsc114._id.toString()
             }
         ]
-        const req = {
-            query: {
-                school: schoolModel.name,
-                subject: 'CPSC',
-            },
-        }
-        const res = {
-            status(status) {
-                expect(status).toBe(200)
-                return this
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourseList)
-            }
-        }
-        await getAllCoursesBySchoolAndSubject(req, res)
-        expect.assertions(2)
+
+        const schoolName = schoolModel.name
+        const subject = 'CPSC'
+        const result = await getAllCoursesBySchoolAndSubject(schoolName, subject)
+        expect(result).toEqual(expectedCourseList)
+        expect.assertions(1)
     })
-    it('ensure parameters are case agnostic', async () => {
+
+    it("returns the correct courses no matter the argument's letter case", async () => {
         const schoolModel = await School.create({ name: 'UBC' })
         const cpsc110 = await Course.create({
             subject: 'CPSC',
@@ -243,7 +233,7 @@ describe('getAllCoursesBySchoolAndSubject', () => {
                 equivalencies: [],
                 notes: 'none',
                 __v: 0,
-                _id: cpsc110._id
+                _id: cpsc110._id.toString()
             },
             {
                 subject: 'CPSC',
@@ -257,7 +247,7 @@ describe('getAllCoursesBySchoolAndSubject', () => {
                 equivalencies: [],
                 notes: 'none',
                 __v: 0,
-                _id: cpsc111._id
+                _id: cpsc111._id.toString()
             },
             {
                 subject: 'CPSC',
@@ -271,7 +261,7 @@ describe('getAllCoursesBySchoolAndSubject', () => {
                 equivalencies: [],
                 notes: 'none',
                 __v: 0,
-                _id: cpsc112._id
+                _id: cpsc112._id.toString()
             },
             {
                 subject: 'CPSC',
@@ -285,7 +275,7 @@ describe('getAllCoursesBySchoolAndSubject', () => {
                 equivalencies: [],
                 notes: 'none',
                 __v: 0,
-                _id: cpsc113._id
+                _id: cpsc113._id.toString()
             },
             {
                 subject: 'CPSC',
@@ -299,44 +289,31 @@ describe('getAllCoursesBySchoolAndSubject', () => {
                 equivalencies: [],
                 notes: 'none',
                 __v: 0,
-                _id: cpsc114._id
+                _id: cpsc114._id.toString()
             }
         ]
-        const req = {
-            query: {
-                school: 'UbC',
-                subject: 'cPSC',
-            },
-        }
-        const res = {
-            status(status) {
-                expect(status).toBe(200)
-                return this
-            },
-            json(result) {
-                expect(result.data).toEqual(expectedCourseList)
-            }
-        }
-        await getAllCoursesBySchoolAndSubject(req, res)
-        expect.assertions(2)
+
+        const schoolName = 'UbC'
+        const subject = 'cPSC'
+        const result = await getAllCoursesBySchoolAndSubject(schoolName, subject)
+        expect(result).toEqual(expectedCourseList)
+        expect.assertions(1)
     })
-    it('404 if school not found', async () => {
-        const req = {
-            query: {
-                school: 'UBC',
-                subject: 'CPSC'
-            }
-        }
-        const res = {
-            status(status) {
-                expect(status).toBe(404)
-                return this
-            },
-            end() {
-                expect(true).toBe(true)
-            }
-        }
-        await getAllCoursesBySchoolAndSubject(req, res)
-        expect.assertions(2)
+
+    it("returns null if school not found", async () => {
+        const schoolName = 'UBC'
+        const subject = 'CPSC'
+        const result = await getAllCoursesBySchoolAndSubject(schoolName, subject)
+        expect(result).toEqual(null)
+        expect.assertions(1)
+    })
+
+    it("returns empty list of courses if no courses are available for the school", async () => {
+        await School.create({ name: 'UBC' })
+        const schoolName = 'UBC'
+        const subject = 'CPSC'
+        const result = await getAllCoursesBySchoolAndSubject(schoolName, subject)
+        expect(result).toEqual([])
+        expect.assertions(1)
     })
 })
