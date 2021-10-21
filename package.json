@@ -10,12 +10,14 @@
     "test": "jest --forceExit --detectOpenHandles  --silent"
   },
   "dependencies": {
+    "@theme-ui/presets": "^0.11.3",
     "@types/mongodb": "^4.0.7",
     "mongoose": "^6.0.9",
     "next": "11.1.2",
     "next-connect": "^0.10.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "theme-ui": "^0.11.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",
