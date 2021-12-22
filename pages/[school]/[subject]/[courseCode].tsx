@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next'
 import { connectToDB } from '../../../db/connect'
 import { getCourse } from '../../../db/course'
 import createNodes from '../../../utils/course_map/createNodes'
-import CourseBox from '../../../components/CourseBox'
+import CourseInfo from '../../../components/CourseInfo'
 import renderMap from '../../../utils/course_map/renderMap'
 
 const CoursePage: FC<{ 
@@ -43,7 +43,7 @@ const CoursePage: FC<{
             }
             ref={divRef}
         >
-            <CourseBox 
+            <CourseInfo 
                 school={school}
                 subject={subject}
                 code={code}

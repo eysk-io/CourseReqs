@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 
-const CourseBox: FC<{
+const CourseInfo: FC<{
     school?: any
     subject?: any
     code?: any
@@ -16,7 +16,7 @@ const CourseBox: FC<{
     notes 
 }) => {
     return (
-        <div className={"course_box"}>
+        <div className={"course-info"}>
             <h1>{school} {subject} {code}</h1>
             <h2>{title}</h2>
             <p>{description}</p>
@@ -25,4 +25,4 @@ const CourseBox: FC<{
     )
 }
 
-export default CourseBox
+export default CourseInfo
