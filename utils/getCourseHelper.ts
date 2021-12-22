@@ -1,7 +1,7 @@
 import Course from "../resources/course/course.model";
 import { CourseReqs } from "../resources/course/courseReqs.model";
 
-export const getCourseHelper = async (
+const getCourseHelper = async (
     schoolId: string,
     courseRequisite,
     courses: Map<any, any>
@@ -97,3 +97,5 @@ export const getCourseHelper = async (
 
     return doc;
 }
+
+export default getCourseHelper

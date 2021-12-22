@@ -1,55 +1,47 @@
 import React, { FC, useEffect, createRef } from 'react'
 import { GetServerSideProps } from 'next'
-import * as THREE from 'three'
 import { connectToDB } from '../../../db/connect'
 import { getCourse } from '../../../db/course'
+import createNodes from '../../../utils/course_map/createNodes'
 import CourseBox from '../../../components/CourseBox'
+import renderMap from '../../../utils/course_map/renderMap'
 
-const CoursePage: FC<{ courseInfo?: any; }> = ({
-    courseInfo 
-}) => {
+const CoursePage: FC<{ 
+    school?: any;
+    subject?: any;
+    code?: any;
+    title?: any;
+    description?: any;
+    notes?: any;
+    nodes?: any;
+    links?: any;
+}> = ({ school, subject, code, title, description, notes, nodes, links }) => {
     const divRef = createRef()
     useEffect(() => {
-        const scene = new THREE.Scene()
-        const camera = new THREE.PerspectiveCamera(
-            75,
-            window.innerWidth / window.innerHeight,
-            0.1,
-            1000
-        )
-        const renderer = new THREE.WebGLRenderer()
-        renderer.setSize(window.innerWidth, window.innerHeight)
-        const divRefNode = divRef.current as Node
-        divRefNode.appendChild(renderer.domElement)
-        const geometry = new THREE.BoxGeometry()
-        const material = new THREE.MeshBasicMaterial({
-            color: 0x00ff00
-        })
-        const cube = new THREE.Mesh(geometry, material)
-        scene.add(cube)
-        camera.position.z = 5
-        function animate() {
-            requestAnimationFrame(animate)
-            cube.rotation.x += 0.01
-            cube.rotation.y += 0.01
-            renderer.render(scene, camera)
+        let courseInfo = {
+            school: school,
+            subject: subject,
+            code: code,
+            title: title,
+            description: description,
+            notes: notes,
+            nodes: nodes,
+            links: links
         }
-        animate()
+        renderMap(
+            divRef.current, 
+            courseInfo
+        )
     }, [divRef])
 
-    const { 
-        school, 
-        subject, 
-        code, 
-        title, 
-        description, 
-        notes 
-    } = courseInfo
     return (
         <div 
-            className={`${school.toLowerCase()}_${subject.toLowerCase()}_${code} course_page`}
+            className={
+                `${school.toLowerCase()}_\
+                ${subject.toLowerCase()}_\
+                ${code}_page`
+            }
             ref={divRef}
-            xmlns="http://www.w3.org/1999/xhtml"
         >
             <CourseBox 
                 school={school}
@@ -66,8 +58,8 @@ const CoursePage: FC<{ courseInfo?: any; }> = ({
 export default CoursePage
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    let courseInfo = {}
     await connectToDB()
+    let courseInfo = { nodes: [], links: [] }
     const { school, subject, courseCode } = context.query
     if (
         typeof school === "string" &&
@@ -76,5 +68,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ) {
         courseInfo = await getCourse(school, subject, courseCode)
     }
-    return { props: { courseInfo: courseInfo } }
+    createNodes(courseInfo)
+    return { props: courseInfo }
 }
