@@ -1,6 +1,6 @@
 import Course from "../resources/course/course.model"
 import School from "../resources/school/school.model"
-import { getCourseHelper } from "../utils"
+import getCourseHelper from "../utils/getCourseHelper"
 
 export const getAllCoursesBySchool = async (schoolName: string): Promise<any> => {
     try {
