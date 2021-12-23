@@ -28,7 +28,9 @@ const CourseInfo: FC<{
                     {title}
                 </a>
             </h2>
-            <p sx={{variant: "containers.courseInfoDescription"}}>{description.replace("<em>", "").replace("</em>","")}</p>
+            <p sx={{variant: "containers.courseInfoDescription"}}>
+                {description.replace("<em>", "").replace("</em>","")}
+            </p>
             <p>{notes ? notes : ""}</p>
         </div>
     )
