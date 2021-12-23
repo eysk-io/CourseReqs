@@ -16,7 +16,10 @@ const CoursePage: FC<{
     notes?: any;
     nodes?: any;
     links?: any;
-}> = ({ school, subject, code, title, credits, description, notes, nodes, links }) => {
+    preRequisites?: any;
+    coRequisites?: any;
+    equivalencies?: any;
+}> = ({ school, subject, code, title, credits, description, notes, nodes, links, preRequisites, coRequisites, equivalencies }) => {
     const divRef = createRef()
     useEffect(() => {
         let courseInfo = {
@@ -28,7 +31,10 @@ const CoursePage: FC<{
             description: description,
             notes: notes,
             nodes: nodes,
-            links: links
+            links: links,
+            preRequisites: preRequisites,
+            coRequisites: coRequisites,
+            equivalencies: equivalencies,
         }
         renderMap(
             divRef.current, 
@@ -53,6 +59,9 @@ const CoursePage: FC<{
                 title={title}
                 description={description}
                 notes={notes}
+                preRequisites={preRequisites}
+                coRequisites={coRequisites}
+                equivalencies={equivalencies}
             />
         </div>
     )

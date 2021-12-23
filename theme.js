@@ -11,7 +11,8 @@ const theme = {
             textAlign: 'center'
         },
         courseInfoDescription: {
-            textAlign: 'justify'
+            textAlign: 'justify',
+            margin: 0
         },
         page: {
             width: '100%',

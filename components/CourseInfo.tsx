@@ -11,6 +11,9 @@ const CourseInfo: FC<{
     credits?: any
     description?: any
     notes?: any
+    preRequisites?: any
+    coRequisites?: any
+    equivalencies?: any
 }> = ({
     school, 
     subject, 
@@ -18,8 +21,23 @@ const CourseInfo: FC<{
     title,
     credits, 
     description, 
-    notes 
+    notes,
+    preRequisites,
+    coRequisites,
+    equivalencies
 }) => {
+    const immediatePreReqs = () => {
+        return "preReqs"
+    }
+
+    const immediateCoReqs = () => {
+        return "coReqs"
+    }
+
+    const immediateEquivalencies = () => {
+        return "equivalencies"
+    }
+
     return (
         <div sx={{variant: "containers.courseInfo"}}>
             <h1>{school} / {subject} {code} ({credits})</h1>
@@ -32,6 +50,15 @@ const CourseInfo: FC<{
                 {description.replace("<em>", "").replace("</em>","")}
             </p>
             <p>{notes ? notes : ""}</p>
+            <em><p sx={{variant: "containers.courseInfoDescription"}}>
+                <b>Pre-requisites:</b> {immediatePreReqs()}
+            </p></em>
+            <em><p sx={{variant: "containers.courseInfoDescription"}}>
+                <b>Co-requisites:</b> {immediateCoReqs()}
+            </p></em>
+            <em><p sx={{variant: "containers.courseInfoDescription"}}>
+                <b>Equivalencies:</b> {immediateEquivalencies()}
+            </p></em>
         </div>
     )
 }
