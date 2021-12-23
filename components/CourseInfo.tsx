@@ -22,7 +22,7 @@ const CourseInfo: FC<{
 }) => {
     return (
         <div sx={{variant: "containers.courseInfo"}}>
-            <h1>{school} / {subject} {code}</h1>
+            <h1>{school} / {subject} {code} ({credits})</h1>
             <h2>{title}</h2>
             <p sx={{variant: "containers.courseInfoDescription"}}>{description}</p>
             <p>{notes ? notes : ""}</p>
