@@ -23,7 +23,11 @@ const CourseInfo: FC<{
     return (
         <div sx={{variant: "containers.courseInfo"}}>
             <h1>{school} / {subject} {code} ({credits})</h1>
-            <h2>{title}</h2>
+            <h2>
+                <a target="_blank" rel="noreferrer" href={`https://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code=${subject}#${code}`}>
+                    {title}
+                </a>
+            </h2>
             <p sx={{variant: "containers.courseInfoDescription"}}>{description.replace("<em>", "").replace("</em>","")}</p>
             <p>{notes ? notes : ""}</p>
         </div>
