@@ -5,13 +5,15 @@ const CourseInfo: FC<{
     subject?: any
     code?: any
     title?: any
+    credits?: any
     description?: any
     notes?: any
 }> = ({
     school, 
     subject, 
     code, 
-    title, 
+    title,
+    credits, 
     description, 
     notes 
 }) => {

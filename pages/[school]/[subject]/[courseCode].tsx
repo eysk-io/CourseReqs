@@ -11,11 +11,12 @@ const CoursePage: FC<{
     subject?: any;
     code?: any;
     title?: any;
+    credits?: any;
     description?: any;
     notes?: any;
     nodes?: any;
     links?: any;
-}> = ({ school, subject, code, title, description, notes, nodes, links }) => {
+}> = ({ school, subject, code, title, credits, description, notes, nodes, links }) => {
     const divRef = createRef()
     useEffect(() => {
         let courseInfo = {
@@ -23,6 +24,7 @@ const CoursePage: FC<{
             subject: subject,
             code: code,
             title: title,
+            credits: credits,
             description: description,
             notes: notes,
             nodes: nodes,
@@ -47,6 +49,7 @@ const CoursePage: FC<{
                 school={school}
                 subject={subject}
                 code={code}
+                credits={credits}
                 title={title}
                 description={description}
                 notes={notes}
