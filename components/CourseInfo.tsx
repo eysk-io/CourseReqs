@@ -1,4 +1,7 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
 import React, { FC } from "react"
+import { jsx } from 'theme-ui'
 
 const CourseInfo: FC<{
     school?: any
@@ -18,11 +21,11 @@ const CourseInfo: FC<{
     notes 
 }) => {
     return (
-        <div className={"course-info"}>
-            <h1>{school} {subject} {code}</h1>
+        <div sx={{variant: "containers.courseInfo"}}>
+            <h1>{school} / {subject} {code}</h1>
             <h2>{title}</h2>
-            <p>{description}</p>
-            <p>{notes ? notes : "none"}</p>
+            <p sx={{variant: "containers.courseInfoDescription"}}>{description}</p>
+            <p>{notes ? notes : ""}</p>
         </div>
     )
 }
