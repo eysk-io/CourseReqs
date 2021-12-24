@@ -10,6 +10,12 @@ const theme = {
             maxWidth: '650px',
             textAlign: 'center'
         },
+        courseMap: {
+            width: "80%",
+            height: "1000px",
+            maxHeight: "80%",
+            margin: "auto"
+        },
         courseInfoDescription: {
             textAlign: 'left',
             margin: 0

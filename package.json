@@ -12,6 +12,8 @@
   "dependencies": {
     "@theme-ui/presets": "^0.11.3",
     "@types/mongodb": "^4.0.7",
+    "gojs": "^2.1.56",
+    "gojs-react": "^1.1.0",
     "lodash-es": "^4.17.21",
     "mongoose": "^6.0.9",
     "next": "11.1.2",
