@@ -11,9 +11,9 @@ const CourseInfo: FC<{
     credits?: any
     description?: any
     notes?: any
-    preRequisites?: any
-    coRequisites?: any
-    equivalencies?: any
+    preRequisitesText?: any
+    coRequisitesText?: any
+    equivalenciesText?: any
 }> = ({
     school, 
     subject, 
@@ -22,20 +22,19 @@ const CourseInfo: FC<{
     credits, 
     description, 
     notes,
-    preRequisites,
-    coRequisites,
-    equivalencies
+    preRequisitesText,
+    coRequisitesText,
+    equivalenciesText
 }) => {
-    const immediatePreReqs = () => {
-        return "preReqs"
-    }
+    const parseReqText = (reqText: string): string => {
+        reqText = reqText.replace("<br />", "")
+        reqText = reqText.replace("<br/>", "")
 
-    const immediateCoReqs = () => {
-        return "coReqs"
-    }
+        if (reqText[reqText.length-1] === ".") {
+            reqText = reqText.slice(0, -1)
+        }
 
-    const immediateEquivalencies = () => {
-        return "equivalencies"
+        return reqText
     }
 
     return (
@@ -51,13 +50,13 @@ const CourseInfo: FC<{
             </p>
             <p>{notes ? notes : ""}</p>
             <em><p sx={{variant: "containers.courseInfoDescription"}}>
-                <b>Pre-requisites:</b> {immediatePreReqs()}
+                <b>Pre-requisites:</b> {preRequisitesText ? parseReqText(preRequisitesText) : "none"}
             </p></em>
             <em><p sx={{variant: "containers.courseInfoDescription"}}>
-                <b>Co-requisites:</b> {immediateCoReqs()}
+                <b>Co-requisites:</b> {coRequisitesText ? parseReqText(coRequisitesText) : "none"}
             </p></em>
             <em><p sx={{variant: "containers.courseInfoDescription"}}>
-                <b>Equivalencies:</b> {immediateEquivalencies()}
+                <b>Equivalencies:</b> {equivalenciesText ? parseReqText(equivalenciesText) : "none"}
             </p></em>
         </div>
     )
