@@ -11,7 +11,7 @@ import updateLinkPosition from "./updateLinkPosition"
 import linkColors from "./linkColors"
 
 export default async function renderMap(div, data) {
-    const { scene, renderer, camera, controls } = initializeScene(div, data)
+    const { scene, renderer, camera, controls } = initializeScene(div)
     data.nodes = await Promise.all(
         data.nodes.map((node) => {
             if (node.level === 0) {
