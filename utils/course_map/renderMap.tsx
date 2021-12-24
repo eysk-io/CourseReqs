@@ -79,7 +79,7 @@ export default async function renderMap(div, data) {
     graph.linkWidth(1)
     graph.linkDirectionalArrowLength(15)
     graph.linkDirectionalArrowRelPos(0.8)
-    graph.d3Force("link").distance(50)
+    graph.d3Force("link").distance(25)
     graph.scale.set(0.004, 0.004, 0.004)
     scene.add(graph)
     camera.lookAt(graph.position);

@@ -14,6 +14,10 @@ const theme = {
             textAlign: 'left',
             margin: 0
         },
+        courseInfoHeaders: {
+            textAlign: 'center',
+            marginTop: 2
+        },
         page: {
             width: '100%',
             maxWidth: '960px',
