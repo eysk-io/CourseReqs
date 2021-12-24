@@ -75,7 +75,7 @@ export default async function renderMap(div, data) {
         }
     )
     graph.linkPositionUpdate(updateLinkPosition)
-    graph.numDimensions(2)
+    graph.numDimensions(3)
     graph.linkWidth(1)
     graph.linkDirectionalArrowLength(15)
     graph.linkDirectionalArrowRelPos(0.8)
