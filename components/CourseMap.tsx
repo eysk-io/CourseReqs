@@ -13,12 +13,18 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
       "course-map", 
       { 
         "undoManager.isEnabled": true, // enable Ctrl-Z to undo and Ctrl-Y to redo
-        initialAutoScale: go.Diagram.Uniform
-      }, 
+        "animationManager.isEnabled": false,
+        initialAutoScale: go.Diagram.Uniform,
+        initialDocumentSpot: go.Spot.Left,
+        initialViewportSpot: go.Spot.Left
+      },
       {
         layout: $(
           go.TreeLayout,
-          { angle: 90, layerSpacing: 125 }
+          { 
+            angle: 0, 
+            layerSpacing: 50
+          }
         )
       })
 
@@ -39,7 +45,19 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           new go.Binding("fill", "color"),
           new go.Binding("stroke", "strokeColor")),
         $("TreeExpanderButton",
-          { alignment: go.Spot.Bottom, alignmentFocus: go.Spot.Top },
+          {
+            "_treeExpandedFigure": "TriangleRight",
+            "_treeCollapsedFigure": "TriangleLeft",
+            "ButtonIcon.fill": "rgb(95, 82, 122)",
+            "ButtonIcon.strokeWidth": 2,
+            "ButtonBorder.figure": "Circle",
+            "ButtonBorder.opacity": 0.0,
+            "_buttonStrokeOver": "rgb(95, 82, 122)"
+          },
+          { 
+            alignment: go.Spot.Right,
+            alignmentFocus: go.Spot.Top
+          },
           { visible: true }),
         $("HyperlinkText",
           function(node) { return node.data.url },
@@ -95,6 +113,21 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
       diagram.commandHandler.scrollToPart(diagram.findNodeForKey(1))
     })
 
+    document.getElementById("collapse-all").addEventListener("click", function() {
+      diagram.scale = 1
+      diagram.nodes.each(function(n) {
+         n.wasTreeExpanded = false;
+         n.collapseTree() 
+      })
+      diagram.commandHandler.collapseTree(diagram.findNodeForKey(1))
+    })
+    
+    document.getElementById("expand-all").addEventListener("click", function() {
+      diagram.scale = 1
+      diagram.nodes.each(function(n) { n.wasTreeExpanded = true; })
+      diagram.findTreeRoots().each(function(n) { n.expandTree(); })
+    })
+
     diagram.addDiagramListener("InitialLayoutCompleted", (e) => {
       e.diagram.findTreeRoots().each(function(r) { r.expandTree(3) })
     })
@@ -103,7 +136,9 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
   return (
       <div>
         <button id="zoom-to-fit">Zoom to Fit</button>
-        <button id="center-root">Center on root</button>
+        <button id="center-root">Center on Root</button>
+        <button id="collapse-all">Collapse All</button>
+        <button id="expand-all">Expand All</button>
         <div id="course-map" sx={{variant: "containers.courseMap"}}></div> 
       </div>
   ) 
