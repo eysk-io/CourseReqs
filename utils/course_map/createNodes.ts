@@ -147,10 +147,10 @@ const getColor = (level: number, isMeta: boolean): string => {
     switch (level) {
         case 1:
             color = "rgb(215, 166, 254)" // violet
-            break;
+            break
         case 2:
             color = "rgb(176, 213, 254)" // blue
-            break;
+            break
         default:
             color = "rgb(178, 219, 192)" // green
     }
@@ -165,10 +165,10 @@ const getStrokeColor = (level: number, isMeta: boolean): string => {
     switch (level) {
         case 1:
             strokeColor = "rgb(134, 3, 241)" // violet
-            break;
+            break
         case 2:
             strokeColor = "rgb(0, 100, 210)" // blue
-            break;
+            break
         default:
             strokeColor = "rgb(21, 138, 52)" // green
     }

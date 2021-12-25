@@ -1,4 +1,4 @@
-import School from "../../resources/school/school.model";
+import School from "../../resources/school/school.model"
 
 describe("School model", () => {
     describe("schema", () => {
