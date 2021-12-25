@@ -119,7 +119,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           }),
         $(go.Shape,
           { 
-            toArrow: "Standard",
+            fromArrow: "Backward",
             strokeWidth: 5,
             stroke: "rgb(240, 245, 250)"
           }))
