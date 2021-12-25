@@ -15,11 +15,12 @@ describe("createNode", () => {
                     code: cpsc110.code,
                     subject: cpsc110.subject,
                     key: "1",
-                    level: 0
+                    level: 0,
+                    color: "rgb(251, 175, 238)",
+                    strokeColor: "rgb(241, 3, 200)"
                 }
             ]
         })
-        expect(cpsc110).toMatchObject({ links: [] })
     })
     it("creates multiple node with multiple single-level pre-requisites", () => {
         createNodes(econ210)
@@ -29,7 +30,9 @@ describe("createNode", () => {
                     code: econ210.code,
                     subject: econ210.subject,
                     key: "1",
-                    level: 0
+                    level: 0,
+                    color: "rgb(251, 175, 238)",
+                    strokeColor: "rgb(241, 3, 200)"
                 },
                 {
                     code: 101,
@@ -45,20 +48,6 @@ describe("createNode", () => {
                 },
             ]
         })
-        expect(econ210).toMatchObject({
-            links: [
-                {
-                    parent: "1",
-                    target: "2",
-                    level: 1
-                },
-                {
-                    parent: "1",
-                    target: "3",
-                    level: 1
-                }
-            ]
-        })
     })
     it("creates multiple nodes and links including oneOf case", () => {
         createNodes(cpsc210)
@@ -68,7 +57,9 @@ describe("createNode", () => {
                     code: cpsc210.code,
                     subject: cpsc210.subject,
                     key: "1",
-                    level: 0
+                    level: 0,
+                    color: "rgb(251, 175, 238)",
+                    strokeColor: "rgb(241, 3, 200)"
                 },
                 {
                     code: "",
@@ -97,32 +88,6 @@ describe("createNode", () => {
                 }
             ]
         })
-        expect(cpsc210).toMatchObject({
-            links: [
-                {
-                    parent: "1",
-                    target: "2",
-                    level: 1
-                },
-                {
-                    parent: "2",
-                    target: "3",
-                    level: 1,
-                    meta: true
-                },
-                {
-                    parent: "3",
-                    target: "4",
-                    level: 2
-                },
-                {
-                    parent: "2",
-                    target: "5",
-                    level: 1,
-                    meta: true
-                }
-            ]
-        })
     })
     it("creates multiple nodes and links including scoreOf case", () => {
         createNodes(math100)
@@ -132,7 +97,9 @@ describe("createNode", () => {
                     code: math100.code,
                     subject: math100.subject,
                     key: "1",
-                    level: 0
+                    level: 0,
+                    color: "rgb(251, 175, 238)",
+                    strokeColor: "rgb(241, 3, 200)"
                 },
                 {
                     code: "",
@@ -168,38 +135,6 @@ describe("createNode", () => {
                 }
             ]
         })
-        expect(math100).toMatchObject({
-            links: [
-                {
-                    parent: "1",
-                    target: "2",
-                    level: 1
-                },
-                {
-                    parent: "1",
-                    target: "3",
-                    level: 1
-                },
-                {
-                    parent: "3",
-                    target: "4",
-                    level: 1,
-                    meta: true
-                },
-                {
-                    parent: "4",
-                    target: "5",
-                    level: 1,
-                    meta: true
-                },
-                {
-                    parent: "4",
-                    target: "6",
-                    level: 1,
-                    meta: true
-                }
-            ]
-        })
     })
     it("creates multiple nodes and links including scoreOf nested in oneOf case", () => {
         createNodes(math120)
@@ -209,7 +144,9 @@ describe("createNode", () => {
                     code: math120.code,
                     subject: math120.subject,
                     key: "1",
-                    level: 0
+                    level: 0,
+                    color: "rgb(251, 175, 238)",
+                    strokeColor: "rgb(241, 3, 200)"
                 },
                 {
                     code: "",
@@ -258,50 +195,6 @@ describe("createNode", () => {
                 }
             ]
         })
-        expect(math120).toMatchObject({
-            links: [
-                {
-                    parent: "1",
-                    target: "2",
-                    level: 1
-                },
-                {
-                    parent: "1",
-                    target: "3",
-                    level: 1
-                },
-                {
-                    parent: "3",
-                    target: "4",
-                    level: 1,
-                    meta: true
-                },
-                {
-                    parent: "4",
-                    target: "5",
-                    level: 1,
-                    meta: true
-                },
-                {
-                    parent: "5",
-                    target: "6",
-                    level: 1,
-                    meta: true
-                },
-                {
-                    parent: "5",
-                    target: "7",
-                    level: 1,
-                    meta: true
-                },
-                {
-                    parent: "3",
-                    target: "8",
-                    level: 1,
-                    meta: true
-                }
-            ]
-        })
     })
     it("creates multiple nodes and links including advancedCredit case", () => {
         createNodes(advancedCreditEx)
@@ -311,7 +204,9 @@ describe("createNode", () => {
                     code: advancedCreditEx.code,
                     subject: advancedCreditEx.subject,
                     key: "1",
-                    level: 0
+                    level: 0,
+                    color: "rgb(251, 175, 238)",
+                    strokeColor: "rgb(241, 3, 200)"
                 },
                 {
                     code: "",
@@ -325,21 +220,6 @@ describe("createNode", () => {
                     subject: advancedCreditEx.subject,
                     key: "3",
                     level: 1
-                },
-            ]
-        })
-        expect(advancedCreditEx).toMatchObject({
-            links: [
-                {
-                    parent: "1",
-                    target: "2",
-                    level: 1
-                },
-                {
-                    parent: "2",
-                    target: "3",
-                    level: 1,
-                    meta: true
                 },
             ]
         })

@@ -12,7 +12,7 @@ const theme = {
         },
         courseMap: {
             width: "90%",
-            height: "800px",
+            height: "600px",
             margin: "auto",
         },
         courseInfoDescription: {

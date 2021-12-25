@@ -4,6 +4,7 @@ const createNodes = (course: any): void => {
     course.nodes.push({
         code: course.code,
         subject: course.subject,
+        nodeName: `${course.subject} ${course.code}`,
         key: key,
         level: 0,
         color: "rgb(251, 175, 238)",
@@ -29,6 +30,7 @@ const addNodes = (
         courseNodes.push({
             code: "",
             subject: "All Of",
+            nodeName: "All Of",
             key: key,
             parent: parent,
             level: level,
@@ -46,6 +48,7 @@ const addNodes = (
         courseNodes.push({
             code: "",
             subject: "One Of",
+            nodeName: "One Of",
             parent: parent,
             key: key,
             level: level,
@@ -63,6 +66,7 @@ const addNodes = (
         courseNodes.push({
             code: course.scoreOf,
             subject: "Score Of",
+            nodeName: `Score Of ${course.scoreOf}`,
             key: key,
             parent: parent,
             level: level,
@@ -80,6 +84,7 @@ const addNodes = (
         courseNodes.push({
             code: "",
             subject: "Advanced Credit",
+            nodeName: "Advanced Credit",
             key: key,
             parent: parent,
             level: level,
@@ -98,6 +103,7 @@ const addNodes = (
         courseNodes.push({
             code: "",
             subject: course.title,
+            nodeName: course.title,
             key: key,
             parent: parent,
             level: level,
@@ -116,6 +122,7 @@ const addNodes = (
         courseNodes.push({
             code: course.code ? course.code : "",
             subject: course.subject ? course.subject : "",
+            nodeName: `${course.subject ? course.subject : ""} ${course.code ? course.code : ""}`,
             key: key,
             parent: parent,
             level: level,
