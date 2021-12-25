@@ -44,7 +44,7 @@ const addNodes = (
             strokeColor: getStrokeColor(level, true),
             figure: "Diamond",
             width: 150,
-            height: 200,
+            height: 100,
             strokeWidth: 8,
             font: "bold 12pt sans-serif",
             url: ""
