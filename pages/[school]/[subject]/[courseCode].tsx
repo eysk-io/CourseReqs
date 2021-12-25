@@ -39,10 +39,7 @@ const CoursePage: FC<{
                 coRequisitesText={coRequisitesText}
                 equivalenciesText={equivalenciesText}
             />
-            <CourseMap
-                nodes={nodes}
-                links={links}
-            />
+            <CourseMap nodes={nodes}/>
         </div>
     )
 }

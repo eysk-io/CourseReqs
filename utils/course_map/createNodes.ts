@@ -1,38 +1,27 @@
 const createNodes = (course: any): void => {
     course.nodes = []
-    course.links = []
     let key: string = "1"
     course.nodes.push({
         code: course.code,
         subject: course.subject,
         key: key,
-        level: 0
+        level: 0,
+        color: "rgb(251, 175, 238)",
+        strokeColor: "rgb(241, 3, 200)"
     })
-    let metaNodes: Set<string> = new Set()
     for (const eachPreReq of course.preRequisites) {
         key = (parseInt(key) + 1).toString()
-        key = addNodes(eachPreReq, course.nodes, course.links, "1", key, 1, metaNodes)
-    }
-    // additional step is required because links are based on parent node, NOT current node 
-    for (const eachLink of course.links) {
-        if (metaNodes.has(eachLink.parent)) {
-            eachLink.meta = true
-        }
+        key = addNodes(eachPreReq, course.nodes, "1", key, 1)
     }
 }
 
 const addNodes = (
     course: any,
     courseNodes: any,
-    courseLinks: any,
     parent: string,
     key: string,
     level: number,
-    metaNodes: Set<string>
 ): string => {
-    if (level > 3)
-        return key
-
     if (course.hasOwnProperty("recommended"))
         return key
 
@@ -41,19 +30,15 @@ const addNodes = (
             code: "",
             subject: "All Of",
             key: key,
-            level: level,
-            meta: true
-        })
-        metaNodes.add(key)
-        courseLinks.push({
             parent: parent,
-            target: key,
-            level: level
+            level: level,
+            color: getColor(level, true),
+            strokeColor: getStrokeColor(level, true)
         })
         parent = key
         for (const eachPreReq of course) {
             key = (parseInt(key) + 1).toString()
-            key = addNodes(eachPreReq, courseNodes, courseLinks, parent, key, level, metaNodes)
+            key = addNodes(eachPreReq, courseNodes, parent, key, level)
         }
     }
 
@@ -61,20 +46,16 @@ const addNodes = (
         courseNodes.push({
             code: "",
             subject: "One Of",
+            parent: parent,
             key: key,
             level: level,
-            meta: true
-        })
-        metaNodes.add(key)
-        courseLinks.push({
-            parent: parent,
-            target: key,
-            level: level
+            color: getColor(level, true),
+            strokeColor: getStrokeColor(level, true)
         })
         parent = key
         for (const eachPreReq of course.oneOf) {
             key = (parseInt(key) + 1).toString()
-            key = addNodes(eachPreReq, courseNodes, courseLinks, parent, key, level, metaNodes)
+            key = addNodes(eachPreReq, courseNodes, parent, key, level)
         }
     }
 
@@ -83,19 +64,15 @@ const addNodes = (
             code: course.scoreOf,
             subject: "Score Of",
             key: key,
-            level: level,
-            meta: true
-        })
-        metaNodes.add(key)
-        courseLinks.push({
             parent: parent,
-            target: key,
-            level: level
+            level: level,
+            color: getColor(level, true),
+            strokeColor: getStrokeColor(level, true)
         })
         parent = key
         for (const eachPreReq of course.courses) {
             key = (parseInt(key) + 1).toString()
-            key = addNodes(eachPreReq, courseNodes, courseLinks, parent, key, level, metaNodes)
+            key = addNodes(eachPreReq, courseNodes, parent, key, level)
         }
     }
 
@@ -104,19 +81,15 @@ const addNodes = (
             code: "",
             subject: "Advanced Credit",
             key: key,
-            level: level,
-            meta: true
-        })
-        metaNodes.add(key)
-        courseLinks.push({
             parent: parent,
-            target: key,
-            level: level
+            level: level,
+            color: getColor(level, true),
+            strokeColor: getStrokeColor(level, true)
         })
         parent = key
         for (const eachPreReq of course.advancedCredit) {
             key = (parseInt(key) + 1).toString()
-            key = addNodes(eachPreReq, courseNodes, courseLinks, parent, key, level, metaNodes)
+            key = addNodes(eachPreReq, courseNodes, parent, key, level)
         }
     }
 
@@ -126,17 +99,15 @@ const addNodes = (
             code: "",
             subject: course.title,
             key: key,
-            level: level
-        })
-        courseLinks.push({
             parent: parent,
-            target: key,
-            level: level
+            level: level,
+            color: getColor(level, false),
+            strokeColor: getStrokeColor(level, false)
         })
         parent = key
         for (const eachPreReq of course.preRequisites) {
             key = (parseInt(key) + 1).toString()
-            key = addNodes(eachPreReq, courseNodes, courseLinks, parent, key, level + 1, metaNodes)
+            key = addNodes(eachPreReq, courseNodes, parent, key, level + 1)
         }
     }
 
@@ -146,21 +117,55 @@ const addNodes = (
             code: course.code ? course.code : "",
             subject: course.subject ? course.subject : "",
             key: key,
-            level: level
-        })
-        courseLinks.push({
             parent: parent,
-            target: key,
-            level: level
+            level: level,
+            color: getColor(level, false),
+            strokeColor: getStrokeColor(level, false)
         })
         parent = key
         for (const eachPreReq of course.preRequisites) {
             key = (parseInt(key) + 1).toString()
-            key = addNodes(eachPreReq, courseNodes, courseLinks, parent, key, level + 1, metaNodes)
+            key = addNodes(eachPreReq, courseNodes, parent, key, level + 1)
         }
     }
 
     return key
+}
+
+const getColor = (level: number, isMeta: boolean): string => {
+    if (isMeta)
+        return "rgb(240, 245, 250)"
+
+    let color = "rgb(178, 219, 192)"
+    switch (level) {
+        case 1:
+            color = "rgb(215, 166, 254)" // violet
+            break;
+        case 2:
+            color = "rgb(176, 213, 254)" // blue
+            break;
+        default:
+            color = "rgb(178, 219, 192)" // green
+    }
+    return color
+}
+
+const getStrokeColor = (level: number, isMeta: boolean): string => {
+    if (isMeta)
+        return "rgb(95, 82, 122)"
+
+    let strokeColor = "rgb(21, 138, 52)"
+    switch (level) {
+        case 1:
+            strokeColor = "rgb(134, 3, 241)" // violet
+            break;
+        case 2:
+            strokeColor = "rgb(0, 100, 210)" // blue
+            break;
+        default:
+            strokeColor = "rgb(21, 138, 52)" // green
+    }
+    return strokeColor
 }
 
 export default createNodes

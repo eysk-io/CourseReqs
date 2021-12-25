@@ -11,10 +11,9 @@ const theme = {
             textAlign: 'center'
         },
         courseMap: {
-            width: "80%",
-            height: "1000px",
-            maxHeight: "80%",
-            margin: "auto"
+            width: "90%",
+            height: "800px",
+            margin: "auto",
         },
         courseInfoDescription: {
             textAlign: 'left',
