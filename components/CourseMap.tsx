@@ -18,6 +18,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
     })
     diagram.nodeTemplate =
       $(go.Node, "Auto",
+        { isTreeExpanded: false },
         $(go.Shape,
           { 
             figure: "RoundedRectangle",
@@ -30,13 +31,15 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
         $(go.TextBlock,
           { 
             margin: 5,
-            font: "bold 14pt sans-serif"
+            font: "bold 24pt sans-serif"
           },
-          new go.Binding("text", "key"))
+          new go.Binding("text", "nodeName")),
+        $("TreeExpanderButton")
       )
     diagram.model = new go.TreeModel(nodes)
 
-    diagram.addDiagramListener("InitialLayoutCompleted", () => {
+    diagram.addDiagramListener("InitialLayoutCompleted", (e) => {
+      e.diagram.findTreeRoots().each(function(r) { r.expandTree(3); });
       let data = nodes.filter(node => node.key === "1")[0]
       let node = diagram.findNodeForData(data)
       diagram.centerRect(node.actualBounds)
