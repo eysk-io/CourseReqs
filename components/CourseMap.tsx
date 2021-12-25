@@ -40,7 +40,8 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           { 
             margin: 5,
             font: "bold 24pt sans-serif"
-          }),
+          },
+          new go.Binding("stroke", "strokeColor")),
       )
 
     diagram.nodeTemplate.contextMenu = 
