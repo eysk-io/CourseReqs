@@ -27,6 +27,28 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           }
         )
       })
+    
+    diagram.add(
+      $(go.Node, "Auto",
+        $(go.Shape,
+          { 
+            figure: "Rectangle",
+            width: 280,
+            height: 125,
+            fill: "rgb(34, 38, 57)",
+            stroke: "rgb(95, 82, 122)",
+            strokeWidth: 6,
+          }),
+        $(go.TextBlock, 
+          { 
+            text: "Right click on node + click 'Remove \n\
+                    Course' to remove course \n\n\
+                    Click on a course node to open its\n\
+                    course reqs page",
+            font: "italic bold 10pt sans-serif",
+            stroke: "rgb(240, 245, 250)",
+            margin: 0
+          })))
 
     diagram.nodeTemplate =
       $(go.Node, "Auto",
@@ -116,7 +138,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
     document.getElementById("collapse-all").addEventListener("click", function() {
       diagram.scale = 1
       diagram.nodes.each(function(n) {
-         n.wasTreeExpanded = false;
+         n.wasTreeExpanded = false
          n.collapseTree() 
       })
       diagram.commandHandler.collapseTree(diagram.findNodeForKey(1))
@@ -124,8 +146,8 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
     
     document.getElementById("expand-all").addEventListener("click", function() {
       diagram.scale = 1
-      diagram.nodes.each(function(n) { n.wasTreeExpanded = true; })
-      diagram.findTreeRoots().each(function(n) { n.expandTree(); })
+      diagram.nodes.each(function(n) { n.wasTreeExpanded = true })
+      diagram.findTreeRoots().each(function(n) { n.expandTree() })
     })
 
     diagram.addDiagramListener("InitialLayoutCompleted", (e) => {
