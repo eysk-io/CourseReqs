@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
-import { GetServerSideProps } from 'next'
-import { connectToDB } from '../../../db/connect'
-import { getCourse } from '../../../db/course'
-import createNodes from '../../../utils/course_map/createNodes'
-import CourseInfo from '../../../components/CourseInfo'
-import CourseMap from '../../../components/CourseMap'
+import React, { FC } from "react"
+import { GetServerSideProps } from "next"
+import { connectToDB } from "../../../db/connect"
+import { getCourse } from "../../../db/course"
+import createNodes from "../../../utils/course_map/createNodes"
+import CourseInfo from "../../../components/CourseInfo"
+import CourseMap from "../../../components/CourseMap"
 
 const CoursePage: FC<{ 
     school?: any;

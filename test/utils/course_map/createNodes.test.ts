@@ -1,10 +1,10 @@
-import createNodes from '../../../utils/course_map/createNodes'
-import cpsc110 from './testData/cpsc110'
-import econ210 from './testData/econ210'
-import cpsc210 from './testData/cpsc210'
-import math100 from './testData/math100'
-import math120 from './testData/math120'
-import advancedCreditEx from './testData/advancedCreditEx'
+import createNodes from "../../../utils/course_map/createNodes"
+import cpsc110 from "./testData/cpsc110"
+import econ210 from "./testData/econ210"
+import cpsc210 from "./testData/cpsc210"
+import math100 from "./testData/math100"
+import math120 from "./testData/math120"
+import advancedCreditEx from "./testData/advancedCreditEx"
 
 describe("createNode", () => {
     it("creates single node with no links", () => {

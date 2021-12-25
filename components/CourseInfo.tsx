@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import React, { FC } from "react"
-import { jsx } from 'theme-ui'
+import { jsx } from "theme-ui"
 
 const CourseInfo: FC<{
     school?: any

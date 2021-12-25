@@ -48,7 +48,7 @@ describe("course model", () => {
             const school = Course.schema.obj.school
             expect(school).toEqual({
                 type: String,
-                ref: 'school',
+                ref: "school",
                 required: true
             })
         })

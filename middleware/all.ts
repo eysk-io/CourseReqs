@@ -1,5 +1,5 @@
-import nc from 'next-connect'
-import db from './db'
+import nc from "next-connect"
+import db from "./db"
 
 const middleware = nc()
 

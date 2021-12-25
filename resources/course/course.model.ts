@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose"
-import { CourseReqs } from './courseReqs.model'
+import { CourseReqs } from "./courseReqs.model"
 
 export type Course =
     {
@@ -80,4 +80,4 @@ courseSchema.index(
     { unique: true }
 )
 
-export default models.Course || model('Course', courseSchema)
+export default models.Course || model("Course", courseSchema)
