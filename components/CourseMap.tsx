@@ -11,11 +11,14 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
 
     const diagram = $(go.Diagram, 
       "course-map", 
-      { "undoManager.isEnabled": true }, // enable Ctrl-Z to undo and Ctrl-Y to redo
+      { 
+        "undoManager.isEnabled": true, // enable Ctrl-Z to undo and Ctrl-Y to redo
+        initialAutoScale: go.Diagram.Uniform
+      }, 
       {
         layout: $(
           go.TreeLayout,
-          { angle: 90, layerSpacing: 50 }
+          { angle: 90, layerSpacing: 125 }
         )
       })
 
@@ -29,18 +32,24 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
             height: 100,
             strokeWidth: 8
           },
+          new go.Binding("width", "width"),
+          new go.Binding("height", "height"),
+          new go.Binding("figure", "figure"),
+          new go.Binding("strokeWidth", "strokeWidth"),
           new go.Binding("fill", "color"),
           new go.Binding("stroke", "strokeColor")),
         $("TreeExpanderButton",
           { alignment: go.Spot.Bottom, alignmentFocus: go.Spot.Top },
           { visible: true }),
         $("HyperlinkText",
-          function(node) { return `http://localhost:3000/ubc/${node.data.subject}/${node.data.code}` },
+          function(node) { return node.data.url },
           function(node) { return node.data.nodeName },
           { 
             margin: 5,
-            font: "bold 24pt sans-serif"
+            textAlign: "center",
+            wrap: go.TextBlock.WrapDesiredSize
           },
+          new go.Binding("font", "font"),
           new go.Binding("stroke", "strokeColor")),
       )
 
@@ -57,6 +66,22 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
                 diagram.commitTransaction("remove course")
               }
             }
+          }))
+    
+    diagram.linkTemplate = 
+      $(go.Link,
+        { routing: go.Link.Orthogonal,  // Orthogonal routing
+          corner: 10 },
+        $(go.Shape,
+          { 
+            strokeWidth: 3,
+            stroke: "rgb(240, 245, 250)"
+          }),
+        $(go.Shape,
+          { 
+            toArrow: "Standard",
+            strokeWidth: 5,
+            stroke: "rgb(240, 245, 250)"
           }))
 
     diagram.model = new go.TreeModel(nodes)

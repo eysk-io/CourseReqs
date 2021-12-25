@@ -8,7 +8,13 @@ const createNodes = (course: any): void => {
         key: key,
         level: 0,
         color: "rgb(251, 175, 238)",
-        strokeColor: "rgb(241, 3, 200)"
+        strokeColor: "rgb(241, 3, 200)",
+        figure: "RoundedRectangle",
+        width: 200,
+        height: 100,
+        strokeWidth: 8,
+        font: "bold 24pt sans-serif",
+        url: `${process.env.COURSE_REQS_URL}/${course.school}/${course.subject}/${course.code}`
     })
     for (const eachPreReq of course.preRequisites) {
         key = (parseInt(key) + 1).toString()
@@ -35,7 +41,13 @@ const addNodes = (
             parent: parent,
             level: level,
             color: getColor(level, true),
-            strokeColor: getStrokeColor(level, true)
+            strokeColor: getStrokeColor(level, true),
+            figure: "Diamond",
+            width: 200,
+            height: 200,
+            strokeWidth: 8,
+            font: "bold 12pt sans-serif",
+            url: ""
         })
         parent = key
         for (const eachPreReq of course) {
@@ -53,7 +65,13 @@ const addNodes = (
             key: key,
             level: level,
             color: getColor(level, true),
-            strokeColor: getStrokeColor(level, true)
+            strokeColor: getStrokeColor(level, true),
+            figure: "Diamond",
+            width: 150,
+            height: 100,
+            strokeWidth: 8,
+            font: "bold 12pt sans-serif",
+            url: ""
         })
         parent = key
         for (const eachPreReq of course.oneOf) {
@@ -66,12 +84,19 @@ const addNodes = (
         courseNodes.push({
             code: course.scoreOf,
             subject: "Score Of",
-            nodeName: `Score Of ${course.scoreOf}`,
+            nodeName: `Score Of\n\
+        ${course.scoreOf}${course.metric === "percentage" ? "%" : ""}`,
             key: key,
             parent: parent,
             level: level,
             color: getColor(level, true),
-            strokeColor: getStrokeColor(level, true)
+            strokeColor: getStrokeColor(level, true),
+            figure: "Diamond",
+            width: 150,
+            height: 100,
+            strokeWidth: 8,
+            font: "bold 12pt sans-serif",
+            url: ""
         })
         parent = key
         for (const eachPreReq of course.courses) {
@@ -84,12 +109,18 @@ const addNodes = (
         courseNodes.push({
             code: "",
             subject: "Advanced Credit",
-            nodeName: "Advanced Credit",
+            nodeName: "Advanced\nCredit",
             key: key,
             parent: parent,
             level: level,
             color: getColor(level, true),
-            strokeColor: getStrokeColor(level, true)
+            strokeColor: getStrokeColor(level, true),
+            figure: "Diamond",
+            width: 150,
+            height: 100,
+            strokeWidth: 8,
+            font: "bold 12pt sans-serif",
+            url: ""
         })
         parent = key
         for (const eachPreReq of course.advancedCredit) {
@@ -108,7 +139,13 @@ const addNodes = (
             parent: parent,
             level: level,
             color: getColor(level, false),
-            strokeColor: getStrokeColor(level, false)
+            strokeColor: getStrokeColor(level, false),
+            figure: "RoundedRectangle",
+            width: 200,
+            height: 100,
+            strokeWidth: 8,
+            font: "bold 24pt sans-serif",
+            url: ""
         })
         parent = key
         for (const eachPreReq of course.preRequisites) {
@@ -127,7 +164,13 @@ const addNodes = (
             parent: parent,
             level: level,
             color: getColor(level, false),
-            strokeColor: getStrokeColor(level, false)
+            strokeColor: getStrokeColor(level, false),
+            figure: "RoundedRectangle",
+            width: 200,
+            height: 100,
+            strokeWidth: 8,
+            font: "bold 24pt sans-serif",
+            url: `${process.env.COURSE_REQS_URL}/${course.school}/${course.subject}/${course.code}`
         })
         parent = key
         for (const eachPreReq of course.preRequisites) {
