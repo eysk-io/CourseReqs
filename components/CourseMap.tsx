@@ -56,13 +56,6 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
       $(go.Node, "Auto",
         { isTreeExpanded: false },
         $(go.Shape,
-          { 
-            figure: "RoundedRectangle",
-            width: 200,
-            height: 100,
-            strokeWidth: 8
-          },
-          new go.Binding("width", "width"),
           new go.Binding("height", "height"),
           new go.Binding("figure", "figure"),
           new go.Binding("strokeWidth", "strokeWidth"),
