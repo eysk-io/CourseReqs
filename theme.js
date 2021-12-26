@@ -21,7 +21,7 @@ const theme = {
         },
         courseMap: {
             width: "90%",
-            height: "600px",
+            height: ["800px", "800px", "800px", "600px"],
             margin: "auto",
         },
         page: {
