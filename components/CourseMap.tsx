@@ -91,6 +91,17 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           },
           new go.Binding("font", "font"),
           new go.Binding("stroke", "strokeColor")),
+        {
+          toolTip:
+            $("ToolTip",
+              new go.Binding("visible", "visible"),
+              $(go.TextBlock,
+                { 
+                  margin: 4,
+                  font: "bold 10pt sans-serif"
+                },
+                new go.Binding("text", "title")))
+        }
       )
 
     diagram.nodeTemplate.contextMenu = 

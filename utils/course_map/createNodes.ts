@@ -11,10 +11,12 @@ const createNodes = (course: any): void => {
         strokeColor: "rgb(241, 3, 200)",
         figure: "RoundedRectangle",
         width: 180,
-        height: 60,
+        height: 75,
         strokeWidth: 8,
         font: "bold 24pt sans-serif",
-        url: `${process.env.COURSE_REQS_URL}/${course.school}/${course.subject}/${course.code}`
+        url: `${process.env.COURSE_REQS_URL}/${course.school}/${course.subject}/${course.code}`,
+        title: `${course.title} (${course.credits})`,
+        visible: true
     })
     for (const eachPreReq of course.preRequisites) {
         key = (parseInt(key) + 1).toString()
@@ -47,7 +49,9 @@ const addNodes = (
             height: 100,
             strokeWidth: 8,
             font: "bold 12pt sans-serif",
-            url: ""
+            url: "",
+            title: "",
+            visible: false
         })
         parent = key
         for (const eachPreReq of course) {
@@ -71,7 +75,9 @@ const addNodes = (
             height: 100,
             strokeWidth: 8,
             font: "bold 12pt sans-serif",
-            url: ""
+            url: "",
+            title: "",
+            visible: false
         })
         parent = key
         for (const eachPreReq of course.oneOf) {
@@ -96,7 +102,9 @@ const addNodes = (
             height: 100,
             strokeWidth: 8,
             font: "bold 12pt sans-serif",
-            url: ""
+            url: "",
+            title: "",
+            visible: false
         })
         parent = key
         for (const eachPreReq of course.courses) {
@@ -120,7 +128,9 @@ const addNodes = (
             height: 100,
             strokeWidth: 8,
             font: "bold 12pt sans-serif",
-            url: ""
+            url: "",
+            title: "",
+            visible: false
         })
         parent = key
         for (const eachPreReq of course.advancedCredit) {
@@ -145,7 +155,9 @@ const addNodes = (
             height: 100,
             strokeWidth: 8,
             font: "bold 24pt sans-serif",
-            url: ""
+            url: "",
+            title: course.title,
+            visible: true
         })
         parent = key
         for (const eachPreReq of course.preRequisites) {
@@ -167,10 +179,12 @@ const addNodes = (
             strokeColor: getStrokeColor(level, false),
             figure: "RoundedRectangle",
             width: 180,
-            height: 60,
+            height: 75,
             strokeWidth: 8,
             font: "bold 24pt sans-serif",
-            url: `${process.env.COURSE_REQS_URL}/${course.school}/${course.subject}/${course.code}`
+            url: `${process.env.COURSE_REQS_URL}/${course.school}/${course.subject}/${course.code}`,
+            title: `${course.title} (${course.credits})`,
+            visible: true
         })
         parent = key
         for (const eachPreReq of course.preRequisites) {
