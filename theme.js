@@ -24,10 +24,12 @@ const theme = {
                 marginTop: 2
             }
         },
-        courseMapCanvas: {
-            width: "90%",
-            height: ["800px", "800px", "800px", "600px"],
-            margin: "auto",
+        courseMap: {
+            canvas: {
+                width: "90%",
+                height: ["800px", "800px", "800px", "600px"],
+                margin: "auto",
+            }
         },
         page: {
             width: "100%",
