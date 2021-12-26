@@ -10,7 +10,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
     const $ = go.GraphObject.make
 
     const diagram = $(go.Diagram, 
-      "course-map", 
+      "course-map-canvas", 
       { 
         "undoManager.isEnabled": true, // enable Ctrl-Z to undo and Ctrl-Y to redo
         "animationManager.isEnabled": false,
@@ -168,13 +168,13 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
   }, [nodes])
 
   return (
-      <div>
+      <div className="course-map">
         <button id="remove-instructions">Remove Instructions</button>
         <button id="zoom-to-fit">Zoom to Fit</button>
         <button id="center-root">Center on Root</button>
         <button id="collapse-all">Collapse All</button>
         <button id="expand-all">Expand All</button>
-        <div id="course-map" sx={{ variant: "containers.courseMap" }}></div> 
+        <div id="course-map-canvas" sx={{ variant: "containers.courseMapCanvas" }}></div> 
       </div>
   ) 
 }

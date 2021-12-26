@@ -24,7 +24,7 @@ const theme = {
                 marginTop: 2
             }
         },
-        courseMap: {
+        courseMapCanvas: {
             width: "90%",
             height: ["800px", "800px", "800px", "600px"],
             margin: "auto",
