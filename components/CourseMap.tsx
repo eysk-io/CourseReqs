@@ -104,7 +104,19 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
     diagram.nodeTemplate.contextMenu = 
       $("ContextMenu",
         $("ContextMenuButton",
-          $(go.TextBlock, "Remove Course"),
+          $(go.Shape, 
+            {
+              fill: "rgb(240, 245, 250)",
+              height: 24,
+              width: 120,
+              stroke: "rgb(240, 245, 250)"
+            }),
+          $(go.TextBlock, 
+            {
+              text: "Remove Course",
+              font: "bold 15px sans-serif",
+              stroke: "rgb(95, 82, 122)"
+            }),
           {
             click: (e, obj) => {
               let node = obj.part.adornedPart
