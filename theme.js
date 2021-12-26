@@ -21,6 +21,7 @@ const theme = {
             },
             headers: {
                 textAlign: "center",
+                fontSize: ["20px", "30px", "30px", "40px"],
                 marginTop: 2
             }
         },
