@@ -153,15 +153,17 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
 
     document.getElementById("collapse-all").addEventListener("click", function() {
       diagram.nodes.each(function(n) {
-         n.wasTreeExpanded = false
-         n.collapseTree() 
+        n.wasTreeExpanded = false
+        n.collapseTree()
       })
       diagram.commandHandler.collapseTree(diagram.findNodeForKey(1))
+      diagram.commandHandler.zoomToFit()
     })
     
     document.getElementById("expand-all").addEventListener("click", function() {
       diagram.nodes.each(function(n) { n.wasTreeExpanded = true })
       diagram.findTreeRoots().each(function(n) { n.expandTree() })
+      diagram.commandHandler.zoomToFit()
     })
 
     diagram.addDiagramListener("InitialLayoutCompleted", (e) => {
