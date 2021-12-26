@@ -34,7 +34,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           { 
             figure: "Rectangle",
             width: 280,
-            height: 125,
+            height: 150,
             fill: "rgb(34, 38, 57)",
             stroke: "rgb(95, 82, 122)",
             strokeWidth: 6,
@@ -42,9 +42,10 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
         $(go.TextBlock, 
           { 
             text: "Right click on node + click 'Remove \n\
-                    Course' to remove course \n\n\
+                    Course' to remove course. \n\n\
                     Click on a course node to open its\n\
-                    course reqs page",
+                    course reqs page. \n\n\
+                    'Ctrl + Z' to Undo or 'Ctrl + Y' to Redo",
             font: "italic bold 10pt sans-serif",
             stroke: "rgb(240, 245, 250)",
             margin: 0
