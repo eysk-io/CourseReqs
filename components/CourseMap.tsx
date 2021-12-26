@@ -161,7 +161,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
         <button id="center-root">Center on Root</button>
         <button id="collapse-all">Collapse All</button>
         <button id="expand-all">Expand All</button>
-        <div id="course-map" sx={{variant: "containers.courseMap"}}></div> 
+        <div id="course-map" sx={{ variant: "containers.courseMap" }}></div> 
       </div>
   ) 
 }
