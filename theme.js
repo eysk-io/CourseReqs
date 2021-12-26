@@ -13,6 +13,7 @@ const theme = {
                 display: ["none", "none", "none", "block"],
                 textAlign: "left",
                 margin: 0,
+                marginTop: 2,
                 requisites: {
                     display: ["none", "block", "block", "block"],
                     textAlign: "left",
@@ -22,7 +23,8 @@ const theme = {
             headers: {
                 textAlign: "center",
                 fontSize: ["20px", "30px", "30px", "40px"],
-                marginTop: 2
+                marginTop: 1,
+                marginBottom: 0,
             }
         },
         courseMap: {
