@@ -94,9 +94,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
                   margin: 4,
                   font: "bold 10pt sans-serif"
                 },
-                new go.Binding("text", "title")))
-        }
-      )
+                new go.Binding("text", "title")))})
 
     diagram.nodeTemplate.contextMenu = 
       $("ContextMenu",
