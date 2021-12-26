@@ -1,20 +1,21 @@
-import { deep } from '@theme-ui/presets'
+import { deep } from "@theme-ui/presets"
 
 const theme = {
     ...deep,
     containers: {
         courseInfo: {
-            margin: 'auto',
+            margin: "auto",
             p: 2,
-            width: '75%',
-            maxWidth: '650px',
-            textAlign: 'center',
+            width: "75%",
+            maxWidth: "650px",
+            textAlign: "center",
             description: {
-                textAlign: 'left',
+                display: ["none", "none", "none", "block"],
+                textAlign: "left",
                 margin: 0
             },
             headers: {
-                textAlign: 'center',
+                textAlign: "center",
                 marginTop: 2
             }
         },
@@ -24,10 +25,10 @@ const theme = {
             margin: "auto",
         },
         page: {
-            width: '100%',
-            maxWidth: '960px',
+            width: "100%",
+            maxWidth: "960px",
             m: 0,
-            mx: 'auto',
+            mx: "auto",
         },
     },
     styles: {
