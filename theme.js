@@ -12,7 +12,12 @@ const theme = {
             description: {
                 display: ["none", "none", "none", "block"],
                 textAlign: "left",
-                margin: 0
+                margin: 0,
+                requisites: {
+                    display: "block",
+                    textAlign: "left",
+                    margin: 0,
+                }
             },
             headers: {
                 textAlign: "center",
