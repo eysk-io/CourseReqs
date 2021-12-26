@@ -1,7 +1,7 @@
-import '../styles/globals.css'
-import Head from 'next/head'
-import { ThemeProvider } from 'theme-ui'
-import theme from '../theme'
+import "../styles/globals.css"
+import Head from "next/head"
+import { ThemeProvider } from "theme-ui"
+import theme from "../theme"
 
 function MyApp({ Component, pageProps }) {
   return (

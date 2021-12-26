@@ -1,10 +1,10 @@
-import React, { FC, useEffect, createRef } from 'react'
-import { GetServerSideProps } from 'next'
-import { connectToDB } from '../../../db/connect'
-import { getCourse } from '../../../db/course'
-import createNodes from '../../../utils/course_map/createNodes'
-import CourseInfo from '../../../components/CourseInfo'
-import renderMap from '../../../utils/course_map/renderMap'
+import React, { FC } from "react"
+import { GetServerSideProps } from "next"
+import { connectToDB } from "../../../db/connect"
+import { getCourse } from "../../../db/course"
+import createNodes from "../../../utils/course_map/createNodes"
+import CourseInfo from "../../../components/CourseInfo"
+import CourseMap from "../../../components/CourseMap"
 
 const CoursePage: FC<{ 
     school?: any;
@@ -20,37 +20,13 @@ const CoursePage: FC<{
     coRequisitesText?: any;
     equivalenciesText?: any;
 }> = ({ school, subject, code, title, credits, description, notes, nodes, links, preRequisitesText, coRequisitesText, equivalenciesText }) => {
-    const divRef = createRef()
-    useEffect(() => {
-        let courseInfo = {
-            school: school,
-            subject: subject,
-            code: code,
-            title: title,
-            credits: credits,
-            description: description,
-            notes: notes,
-            nodes: nodes,
-            links: links,
-            preRequisitesText: preRequisitesText,
-            coRequisitesText: coRequisitesText,
-            equivalenciesText: equivalenciesText,
-        }
-        renderMap(
-            divRef.current, 
-            courseInfo
-        )
-    }, [divRef])
 
     return (
-        <div 
-            className={
-                `${school.toLowerCase()}_\
-                ${subject.toLowerCase()}_\
-                ${code}_page`
-            }
-            ref={divRef}
-        >
+        <div className={
+            `${school.toLowerCase()}_\
+            ${subject.toLowerCase()}_\
+            ${code}_page`
+        }>
             <CourseInfo 
                 school={school}
                 subject={subject}
@@ -63,6 +39,7 @@ const CoursePage: FC<{
                 coRequisitesText={coRequisitesText}
                 equivalenciesText={equivalenciesText}
             />
+            <CourseMap nodes={nodes}/>
         </div>
     )
 }

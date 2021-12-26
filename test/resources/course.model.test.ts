@@ -1,4 +1,4 @@
-import Course from "../../resources/course/course.model";
+import Course from "../../resources/course/course.model"
 
 describe("course model", () => {
     describe("schema", () => {
@@ -17,16 +17,16 @@ describe("course model", () => {
                 type: String,
                 required: true,
                 trim: true
-            });
-        });
+            })
+        })
         test("description", () => {
             const description = Course.schema.obj.description
             expect(description).toEqual({
                 type: String,
                 required: true,
                 trim: true
-            });
-        });
+            })
+        })
         test("code", () => {
             const code = Course.schema.obj.code
             expect(code).toEqual({
@@ -45,40 +45,40 @@ describe("course model", () => {
             })
         })
         test("school", () => {
-            const school = Course.schema.obj.school;
+            const school = Course.schema.obj.school
             expect(school).toEqual({
                 type: String,
-                ref: 'school',
+                ref: "school",
                 required: true
-            });
-        });
+            })
+        })
         test("pre-requisites", () => {
-            const preRequisites = Course.schema.obj.preRequisites;
+            const preRequisites = Course.schema.obj.preRequisites
             expect(preRequisites).toEqual({
                 type: [],
                 required: true
-            });
-        });
+            })
+        })
         test("co-requisites", () => {
-            const coRequisites = Course.schema.obj.coRequisites;
+            const coRequisites = Course.schema.obj.coRequisites
             expect(coRequisites).toEqual({
                 type: [],
                 required: true
-            });
-        });
+            })
+        })
         test("equivalencies", () => {
-            const equivalencies = Course.schema.obj.equivalencies;
+            const equivalencies = Course.schema.obj.equivalencies
             expect(equivalencies).toEqual({
                 type: [],
                 required: true
-            });
-        });
+            })
+        })
         test("notes", () => {
-            const notes = Course.schema.obj.notes;
+            const notes = Course.schema.obj.notes
             expect(notes).toEqual({
                 type: String,
                 required: true
-            });
-        });
-    });
-});
+            })
+        })
+    })
+})

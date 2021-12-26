@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import React, { FC } from "react"
-import { jsx } from 'theme-ui'
+import { jsx } from "theme-ui"
 
 const CourseInfo: FC<{
     school?: any
@@ -38,26 +38,26 @@ const CourseInfo: FC<{
     }
 
     return (
-        <div sx={{variant: "containers.courseInfo"}}>
-            <h1 sx={{variant: "containers.courseInfoHeaders"}}>
+        <div sx={{ variant: "containers.courseInfo" }}>
+            <h1 sx={{ variant: "containers.courseInfo.headers" }}>
                 {school} - {subject} {code} ({credits})
             </h1>
-            <h2 sx={{variant: "containers.courseInfoHeaders"}}>
+            <h2 sx={{ variant: "containers.courseInfo.headers" }}>
                 <a target="_blank" rel="noreferrer" href={`https://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code=${subject}#${code}`}>
                     {title}
                 </a>
             </h2>
-            <p sx={{variant: "containers.courseInfoDescription"}}>
+            <p sx={{ variant: "containers.courseInfo.description" }}>
                 {description.replace("<em>", "").replace("</em>","")}
             </p>
             <p>{notes ? notes : ""}</p>
-            <em><p sx={{variant: "containers.courseInfoDescription"}}>
+            <em><p sx={{ variant: "containers.courseInfo.description.requisites" }}>
                 <b>Pre-requisites:</b> {preRequisitesText ? parseReqText(preRequisitesText) : "none"}
             </p></em>
-            <em><p sx={{variant: "containers.courseInfoDescription"}}>
+            <em><p sx={{ variant: "containers.courseInfo.description.requisites" }}>
                 <b>Co-requisites:</b> {coRequisitesText ? parseReqText(coRequisitesText) : "none"}
             </p></em>
-            <em><p sx={{variant: "containers.courseInfoDescription"}}>
+            <em><p sx={{ variant: "containers.courseInfo.description.requisites" }}>
                 <b>Equivalencies:</b> {equivalenciesText ? parseReqText(equivalenciesText) : "none"}
             </p></em>
         </div>

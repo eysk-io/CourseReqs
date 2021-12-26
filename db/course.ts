@@ -34,7 +34,7 @@ export const getAllCoursesBySchoolAndSubject = async (
         const schoolDoc = await School
             .findOne({ name: schoolName })
             .lean()
-            .exec();
+            .exec()
         if (!schoolDoc) {
             return null
         }

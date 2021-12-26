@@ -1,59 +1,62 @@
 const createNodes = (course: any): void => {
     course.nodes = []
-    course.links = []
-    let id: string = "1"
+    let key: string = "1"
     course.nodes.push({
         code: course.code,
         subject: course.subject,
-        id: id,
-        level: 0
+        nodeName: `${course.subject} ${course.code}`,
+        key: key,
+        level: 0,
+        color: "rgb(251, 175, 238)",
+        strokeColor: "rgb(241, 3, 200)",
+        figure: "RoundedRectangle",
+        width: 180,
+        height: 75,
+        strokeWidth: 8,
+        font: "bold 24pt sans-serif",
+        url: `${process.env.COURSE_REQS_URL}/${course.school}/${course.subject}/${course.code}`,
+        title: `${course.title} (${course.credits})`,
+        visible: true
     })
-    let metaNodes: Set<string> = new Set()
     for (const eachPreReq of course.preRequisites) {
-        id = (parseInt(id) + 1).toString()
-        id = addNodes(eachPreReq, course.nodes, course.links, "1", id, 1, metaNodes)
-    }
-    // additional step is required because links are based on source node, NOT current node 
-    for (const eachLink of course.links) {
-        if (metaNodes.has(eachLink.source)) {
-            eachLink.meta = true
-        }
+        key = (parseInt(key) + 1).toString()
+        key = addNodes(eachPreReq, course.nodes, "1", key, 1)
     }
 }
 
 const addNodes = (
     course: any,
     courseNodes: any,
-    courseLinks: any,
-    source: string,
-    id: string,
+    parent: string,
+    key: string,
     level: number,
-    metaNodes: Set<string>
 ): string => {
-    if (level > 3)
-        return id
-
     if (course.hasOwnProperty("recommended"))
-        return id
+        return key
 
     if (Array.isArray(course)) {
         courseNodes.push({
             code: "",
             subject: "All Of",
-            id: id,
+            nodeName: "All Of",
+            key: key,
+            parent: parent,
             level: level,
-            meta: true
+            color: getColor(level, true),
+            strokeColor: getStrokeColor(level, true),
+            figure: "Diamond",
+            width: 150,
+            height: 100,
+            strokeWidth: 8,
+            font: "bold 12pt sans-serif",
+            url: "",
+            title: "",
+            visible: false
         })
-        metaNodes.add(id)
-        courseLinks.push({
-            source: source,
-            target: id,
-            level: level
-        })
-        source = id
+        parent = key
         for (const eachPreReq of course) {
-            id = (parseInt(id) + 1).toString()
-            id = addNodes(eachPreReq, courseNodes, courseLinks, source, id, level, metaNodes)
+            key = (parseInt(key) + 1).toString()
+            key = addNodes(eachPreReq, courseNodes, parent, key, level)
         }
     }
 
@@ -61,20 +64,25 @@ const addNodes = (
         courseNodes.push({
             code: "",
             subject: "One Of",
-            id: id,
+            nodeName: "One Of",
+            parent: parent,
+            key: key,
             level: level,
-            meta: true
+            color: getColor(level, true),
+            strokeColor: getStrokeColor(level, true),
+            figure: "Diamond",
+            width: 150,
+            height: 100,
+            strokeWidth: 8,
+            font: "bold 12pt sans-serif",
+            url: "",
+            title: "",
+            visible: false
         })
-        metaNodes.add(id)
-        courseLinks.push({
-            source: source,
-            target: id,
-            level: level
-        })
-        source = id
+        parent = key
         for (const eachPreReq of course.oneOf) {
-            id = (parseInt(id) + 1).toString()
-            id = addNodes(eachPreReq, courseNodes, courseLinks, source, id, level, metaNodes)
+            key = (parseInt(key) + 1).toString()
+            key = addNodes(eachPreReq, courseNodes, parent, key, level)
         }
     }
 
@@ -82,20 +90,26 @@ const addNodes = (
         courseNodes.push({
             code: course.scoreOf,
             subject: "Score Of",
-            id: id,
+            nodeName: `Score Of\n\
+        ${course.scoreOf}${course.metric === "percentage" ? "%" : ""}`,
+            key: key,
+            parent: parent,
             level: level,
-            meta: true
+            color: getColor(level, true),
+            strokeColor: getStrokeColor(level, true),
+            figure: "Diamond",
+            width: 150,
+            height: 100,
+            strokeWidth: 8,
+            font: "bold 12pt sans-serif",
+            url: "",
+            title: "",
+            visible: false
         })
-        metaNodes.add(id)
-        courseLinks.push({
-            source: source,
-            target: id,
-            level: level
-        })
-        source = id
+        parent = key
         for (const eachPreReq of course.courses) {
-            id = (parseInt(id) + 1).toString()
-            id = addNodes(eachPreReq, courseNodes, courseLinks, source, id, level, metaNodes)
+            key = (parseInt(key) + 1).toString()
+            key = addNodes(eachPreReq, courseNodes, parent, key, level)
         }
     }
 
@@ -103,20 +117,25 @@ const addNodes = (
         courseNodes.push({
             code: "",
             subject: "Advanced Credit",
-            id: id,
+            nodeName: "Advanced\nCredit",
+            key: key,
+            parent: parent,
             level: level,
-            meta: true
+            color: getColor(level, true),
+            strokeColor: getStrokeColor(level, true),
+            figure: "Diamond",
+            width: 150,
+            height: 100,
+            strokeWidth: 8,
+            font: "bold 12pt sans-serif",
+            url: "",
+            title: "",
+            visible: false
         })
-        metaNodes.add(id)
-        courseLinks.push({
-            source: source,
-            target: id,
-            level: level
-        })
-        source = id
+        parent = key
         for (const eachPreReq of course.advancedCredit) {
-            id = (parseInt(id) + 1).toString()
-            id = addNodes(eachPreReq, courseNodes, courseLinks, source, id, level, metaNodes)
+            key = (parseInt(key) + 1).toString()
+            key = addNodes(eachPreReq, courseNodes, parent, key, level)
         }
     }
 
@@ -125,18 +144,25 @@ const addNodes = (
         courseNodes.push({
             code: "",
             subject: course.title,
-            id: id,
-            level: level
+            nodeName: course.title,
+            key: key,
+            parent: parent,
+            level: level,
+            color: getColor(level, false),
+            strokeColor: getStrokeColor(level, false),
+            figure: "RoundedRectangle",
+            width: 200,
+            height: 50,
+            strokeWidth: 8,
+            font: "bold 14pt sans-serif",
+            url: "",
+            title: course.title,
+            visible: true
         })
-        courseLinks.push({
-            source: source,
-            target: id,
-            level: level
-        })
-        source = id
+        parent = key
         for (const eachPreReq of course.preRequisites) {
-            id = (parseInt(id) + 1).toString()
-            id = addNodes(eachPreReq, courseNodes, courseLinks, source, id, level + 1, metaNodes)
+            key = (parseInt(key) + 1).toString()
+            key = addNodes(eachPreReq, courseNodes, parent, key, level + 1)
         }
     }
 
@@ -145,22 +171,65 @@ const addNodes = (
         courseNodes.push({
             code: course.code ? course.code : "",
             subject: course.subject ? course.subject : "",
-            id: id,
-            level: level
+            nodeName: `${course.subject ? course.subject : ""} ${course.code ? course.code : ""}`,
+            key: key,
+            parent: parent,
+            level: level,
+            color: getColor(level, false),
+            strokeColor: getStrokeColor(level, false),
+            figure: "RoundedRectangle",
+            width: 180,
+            height: 75,
+            strokeWidth: 8,
+            font: "bold 24pt sans-serif",
+            url: `${process.env.COURSE_REQS_URL}/${course.school}/${course.subject}/${course.code}`,
+            title: `${course.title} (${course.credits})`,
+            visible: true
         })
-        courseLinks.push({
-            source: source,
-            target: id,
-            level: level
-        })
-        source = id
+        parent = key
         for (const eachPreReq of course.preRequisites) {
-            id = (parseInt(id) + 1).toString()
-            id = addNodes(eachPreReq, courseNodes, courseLinks, source, id, level + 1, metaNodes)
+            key = (parseInt(key) + 1).toString()
+            key = addNodes(eachPreReq, courseNodes, parent, key, level + 1)
         }
     }
 
-    return id
+    return key
+}
+
+const getColor = (level: number, isMeta: boolean): string => {
+    if (isMeta)
+        return "rgb(240, 245, 250)"
+
+    let color = "rgb(178, 219, 192)"
+    switch (level) {
+        case 1:
+            color = "rgb(215, 166, 254)" // violet
+            break
+        case 2:
+            color = "rgb(176, 213, 254)" // blue
+            break
+        default:
+            color = "rgb(178, 219, 192)" // green
+    }
+    return color
+}
+
+const getStrokeColor = (level: number, isMeta: boolean): string => {
+    if (isMeta)
+        return "rgb(95, 82, 122)"
+
+    let strokeColor = "rgb(21, 138, 52)"
+    switch (level) {
+        case 1:
+            strokeColor = "rgb(134, 3, 241)" // violet
+            break
+        case 2:
+            strokeColor = "rgb(0, 100, 210)" // blue
+            break
+        default:
+            strokeColor = "rgb(21, 138, 52)" // green
+    }
+    return strokeColor
 }
 
 export default createNodes
