@@ -14,7 +14,7 @@ const theme = {
                 textAlign: "left",
                 margin: 0,
                 requisites: {
-                    display: "block",
+                    display: ["none", "block", "block", "block"],
                     textAlign: "left",
                     margin: 0,
                 }
