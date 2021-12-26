@@ -87,8 +87,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           function(node) { return node.data.nodeName },
           { 
             margin: 5,
-            textAlign: "center",
-            wrap: go.TextBlock.WrapDesiredSize
+            textAlign: "center"
           },
           new go.Binding("font", "font"),
           new go.Binding("stroke", "strokeColor")),
