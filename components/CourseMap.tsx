@@ -41,8 +41,8 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           }),
         $(go.TextBlock, 
           { 
-            text: "Right click on node + click 'Remove\n\
-                    Course' to remove course.\n\n\
+            text: "Right click on or hold down node +\n\
+                    click 'Remove Course' to remove course.\n\n\
                     Click on a course node to open its\n\
                     course reqs page.\n\n\
                     'Ctrl + Z' to Undo or 'Ctrl + Y' to Redo.\n\n\
