@@ -152,9 +152,9 @@ const addNodes = (
             strokeColor: getStrokeColor(level, false),
             figure: "RoundedRectangle",
             width: 200,
-            height: 100,
+            height: 50,
             strokeWidth: 8,
-            font: "bold 24pt sans-serif",
+            font: "bold 14pt sans-serif",
             url: "",
             title: course.title,
             visible: true
