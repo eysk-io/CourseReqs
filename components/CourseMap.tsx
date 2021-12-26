@@ -28,7 +28,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
         )
       })
     
-    diagram.add(
+    const legend = 
       $(go.Node, "Auto",
         $(go.Shape,
           { 
@@ -48,7 +48,8 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
             font: "italic bold 10pt sans-serif",
             stroke: "rgb(240, 245, 250)",
             margin: 0
-          })))
+          }))
+    diagram.add(legend)
 
     diagram.nodeTemplate =
       $(go.Node, "Auto",
@@ -137,6 +138,10 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
 
     diagram.model = new go.TreeModel(nodes)
 
+    document.getElementById("remove-instructions").addEventListener("click", function() {
+      diagram.remove(legend)
+    })
+
     document.getElementById("zoom-to-fit").addEventListener("click", function() {
       diagram.commandHandler.zoomToFit()
     })
@@ -147,7 +152,6 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
     })
 
     document.getElementById("collapse-all").addEventListener("click", function() {
-      diagram.scale = 1
       diagram.nodes.each(function(n) {
          n.wasTreeExpanded = false
          n.collapseTree() 
@@ -156,7 +160,6 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
     })
     
     document.getElementById("expand-all").addEventListener("click", function() {
-      diagram.scale = 1
       diagram.nodes.each(function(n) { n.wasTreeExpanded = true })
       diagram.findTreeRoots().each(function(n) { n.expandTree() })
     })
@@ -168,6 +171,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
 
   return (
       <div>
+        <button id="remove-instructions">Remove Instructions</button>
         <button id="zoom-to-fit">Zoom to Fit</button>
         <button id="center-root">Center on Root</button>
         <button id="collapse-all">Collapse All</button>
