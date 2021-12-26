@@ -169,11 +169,55 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
 
   return (
       <div className="course-map">
-        <button id="remove-instructions">Remove Instructions</button>
-        <button id="zoom-to-fit">Zoom to Fit</button>
-        <button id="center-root">Center on Root</button>
-        <button id="collapse-all">Collapse All</button>
-        <button id="expand-all">Expand All</button>
+        <div sx={{ variant: "containers.courseMap.buttonContainer" }}>
+          {/* Using an iterator to create each button results in error 
+          because of each getElementById(<button-id>) */}
+          <button 
+            id="remove-instructions" 
+            sx={{ 
+              variant: "containers.courseMap.button",
+              "&:hover": { transform: "translateY(-0.25em)", transition: "0.2s"} 
+            }}
+          >
+            Remove Instructions
+          </button>
+          <button 
+            id="zoom-to-fit" 
+            sx={{ 
+              variant: "containers.courseMap.button",
+              "&:hover": { transform: "translateY(-0.25em)"} 
+            }}
+          >
+            Zoom to Fit
+          </button>
+          <button 
+            id="center-root" 
+            sx={{ 
+              variant: "containers.courseMap.button",
+              "&:hover": { transform: "translateY(-0.25em)"} 
+            }}
+          >
+            Center on Root
+          </button>
+          <button 
+            id="collapse-all" 
+            sx={{ 
+              variant: "containers.courseMap.button",
+              "&:hover": { transform: "translateY(-0.25em)"} 
+            }}
+          >
+            Collapse All
+          </button>
+          <button 
+            id="expand-all"
+            sx={{ 
+              variant: "containers.courseMap.button",
+              "&:hover": { transform: "translateY(-0.25em)"} 
+            }}
+          >
+            Expand All
+          </button>
+        </div>
         <div id="course-map-canvas" sx={{ variant: "containers.courseMap.canvas" }}></div> 
       </div>
   ) 

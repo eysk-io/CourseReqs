@@ -30,6 +30,25 @@ const theme = {
                 width: "90%",
                 height: ["800px", "800px", "800px", "600px"],
                 margin: "auto",
+            },
+            buttonContainer: {
+                width: "90%",
+                margin: "auto",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: "25px"
+            },
+            button: {
+                backgroundColor: "rgb(240, 245, 250)",
+                border: "4px solid rgb(95, 82, 122)",
+                transition: "0.25s",
+                padding: "5px",
+                margin: "5px",
+                fontSize: ["7px", "10px", "18px", "18px"],
+                fontWeight: "bold",
+                color: "rgb(95, 82, 122)",
+                cursor: "pointer"
             }
         },
         page: {
