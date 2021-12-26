@@ -77,8 +77,7 @@ const math120 = {
     "school": "UBC",
     "title": "Honours Differential Calculus",
     "notes": "",
-    "nodes": [],
-    "links": []
+    "nodes": []
 }
 
 export default math120

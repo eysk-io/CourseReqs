@@ -15,11 +15,10 @@ const CoursePage: FC<{
     description?: any;
     notes?: any;
     nodes?: any;
-    links?: any;
     preRequisitesText?: any;
     coRequisitesText?: any;
     equivalenciesText?: any;
-}> = ({ school, subject, code, title, credits, description, notes, nodes, links, preRequisitesText, coRequisitesText, equivalenciesText }) => {
+}> = ({ school, subject, code, title, credits, description, notes, nodes, preRequisitesText, coRequisitesText, equivalenciesText }) => {
 
     return (
         <div className={
@@ -48,7 +47,7 @@ export default CoursePage
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     await connectToDB()
-    let courseInfo = { nodes: [], links: [] }
+    let courseInfo = { nodes: [] }
     const { school, subject, courseCode } = context.query
     if (
         typeof school === "string" &&

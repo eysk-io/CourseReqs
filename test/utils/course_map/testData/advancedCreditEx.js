@@ -28,8 +28,7 @@ const advancedCreditEx = {
     "school": "UBC",
     "title": "Matrix Algebra",
     "notes": "",
-    "nodes": [],
-    "links": []
+    "nodes": []
 }
 
 export default advancedCreditEx

@@ -10,8 +10,7 @@ const cpsc110 = {
     "school": "UBC",
     "title": "Computation, Programs, and Programming",
     "notes": "",
-    "nodes": [],
-    "links": []
+    "nodes": []
 }
 
 export default cpsc110

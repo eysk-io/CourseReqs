@@ -55,8 +55,7 @@ const cpsc210 = {
     "school": "UBC",
     "title": "Software Construction",
     "notes": "",
-    "nodes": [],
-    "links": []
+    "nodes": []
 }
 
 export default cpsc210

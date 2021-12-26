@@ -7,7 +7,7 @@ import math120 from "./testData/math120"
 import advancedCreditEx from "./testData/advancedCreditEx"
 
 describe("createNode", () => {
-    it("creates single node with no links", () => {
+    it("creates single node", () => {
         createNodes(cpsc110)
         expect(cpsc110).toMatchObject({
             nodes: [
@@ -49,7 +49,7 @@ describe("createNode", () => {
             ]
         })
     })
-    it("creates multiple nodes and links including oneOf case", () => {
+    it("creates multiple nodes including oneOf case", () => {
         createNodes(cpsc210)
         expect(cpsc210).toMatchObject({
             nodes: [
@@ -89,7 +89,7 @@ describe("createNode", () => {
             ]
         })
     })
-    it("creates multiple nodes and links including scoreOf case", () => {
+    it("creates multiple nodes including scoreOf case", () => {
         createNodes(math100)
         expect(math100).toMatchObject({
             nodes: [
@@ -136,7 +136,7 @@ describe("createNode", () => {
             ]
         })
     })
-    it("creates multiple nodes and links including scoreOf nested in oneOf case", () => {
+    it("creates multiple nodes including scoreOf nested in oneOf case", () => {
         createNodes(math120)
         expect(math120).toMatchObject({
             nodes: [
@@ -196,7 +196,7 @@ describe("createNode", () => {
             ]
         })
     })
-    it("creates multiple nodes and links including advancedCredit case", () => {
+    it("creates multiple nodes including advancedCredit case", () => {
         createNodes(advancedCreditEx)
         expect(advancedCreditEx).toMatchObject({
             nodes: [

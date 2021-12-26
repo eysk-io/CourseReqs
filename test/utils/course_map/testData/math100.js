@@ -63,8 +63,7 @@ const math100 = {
     "school": "UBC",
     "title": "Differential Calculus with Applications to Physical Sciences and Engineering",
     "notes": "",
-    "nodes": [],
-    "links": []
+    "nodes": []
 }
 
 export default math100

@@ -37,8 +37,7 @@ const econ210 = {
     "school": "UBC",
     "title": "Microeconomic Policy",
     "notes": "",
-    "nodes": [],
-    "links": []
+    "nodes": []
 }
 
 export default econ210
