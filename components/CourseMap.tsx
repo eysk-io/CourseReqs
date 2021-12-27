@@ -38,8 +38,6 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
       diagram.findTreeRoots().each(function(n) { n.expandTree() })
       diagram.commandHandler.zoomToFit()
     })
-
-
   }, [legend, diagram])
   
   const initDiagram = (): go.Diagram => {
