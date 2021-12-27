@@ -28,11 +28,6 @@ const theme = {
             }
         },
         courseMap: {
-            canvas: {
-                width: "90%",
-                height: ["800px", "800px", "800px", "600px"],
-                margin: "auto",
-            },
             buttonContainer: {
                 width: "90%",
                 margin: "auto",

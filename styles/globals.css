@@ -14,3 +14,15 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.course-map-canvas {
+  width: 90%;
+  height: 800px;
+  margin: auto;
+}
+
+@media only screen and (min-width: 1024px) {
+  .course-map-canvas {
+    height: 600px
+  }
+}

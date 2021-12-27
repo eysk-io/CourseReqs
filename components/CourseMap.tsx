@@ -1,16 +1,51 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { FC, useEffect } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { jsx } from "theme-ui"
 import * as go from "gojs"
+import { ReactDiagram } from "gojs-react"
 import "../utils/course_map/HyperlinkText"
 
 const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
-  useEffect(() => {
-    const $ = go.GraphObject.make
+  const [legend, setLegend] = useState(new go.Node())
+  const [diagram, setDiagram] = useState(new go.Diagram())
 
-    const diagram = $(go.Diagram, 
-      "course-map-canvas", 
+  useEffect(() => {
+    document.getElementById("remove-instructions").addEventListener("click", function() {
+      diagram.remove(legend)
+    })
+
+    document.getElementById("zoom-to-fit").addEventListener("click", function() {
+      diagram.commandHandler.zoomToFit()
+    })
+
+    document.getElementById("center-root").addEventListener("click", function() {
+      diagram.scale = 1
+      diagram.commandHandler.scrollToPart(diagram.findNodeForKey(1))
+    })
+
+    document.getElementById("collapse-all").addEventListener("click", function() {
+      diagram.nodes.each(function(n) {
+        n.wasTreeExpanded = false
+        n.collapseTree()
+      })
+      diagram.commandHandler.collapseTree(diagram.findNodeForKey(1))
+      diagram.commandHandler.zoomToFit()
+    })
+    
+    document.getElementById("expand-all").addEventListener("click", function() {
+      diagram.nodes.each(function(n) { n.wasTreeExpanded = true })
+      diagram.findTreeRoots().each(function(n) { n.expandTree() })
+      diagram.commandHandler.zoomToFit()
+    })
+
+
+  }, [legend, diagram])
+  
+  const initDiagram = (): go.Diagram => {
+    const $ = go.GraphObject.make
+  
+    const diagram = $(go.Diagram,
       { 
         "undoManager.isEnabled": true, // enable Ctrl-Z to undo and Ctrl-Y to redo
         "animationManager.isEnabled": false,
@@ -27,36 +62,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           }
         )
       })
-    
-    const legend = 
-      $(go.Node, "Auto",
-        $(go.Shape,
-          { 
-            figure: "Rectangle",
-            width: 280,
-            height: 225,
-            fill: "rgb(34, 38, 57)",
-            stroke: "rgb(95, 82, 122)",
-            strokeWidth: 6,
-          }),
-        $(go.TextBlock, 
-          { 
-            text: "Right click on or hold down node +\n\
-                    click 'Remove Course' to remove course.\n\n\
-                    Click on a course node to open its\n\
-                    course reqs page.\n\n\
-                    'Ctrl + Z' to Undo or 'Ctrl + Y' to Redo.\n\n\
-                    Course Reqs is NOT a substitute for\n\
-                    academic advising. Not all information\n\
-                    is 100% correct or up-to-date.\n\
-                    Should double-check all information\n\
-                    on the official course calendar.",
-            font: "italic bold 10pt sans-serif",
-            stroke: "rgb(240, 245, 250)",
-            margin: 0
-          }))
-    diagram.add(legend)
-
+  
     diagram.nodeTemplate =
       $(go.Node, "Auto",
         { isTreeExpanded: false },
@@ -100,7 +106,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
                   font: "bold 10pt sans-serif"
                 },
                 new go.Binding("text", "title")))})
-
+  
     diagram.nodeTemplate.contextMenu = 
       $("ContextMenu",
         $("ContextMenuButton",
@@ -143,41 +149,47 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
             strokeWidth: 5,
             stroke: "rgb(240, 245, 250)"
           }))
-
-    diagram.model = new go.TreeModel(nodes)
-
-    document.getElementById("remove-instructions").addEventListener("click", function() {
-      diagram.remove(legend)
-    })
-
-    document.getElementById("zoom-to-fit").addEventListener("click", function() {
-      diagram.commandHandler.zoomToFit()
-    })
-
-    document.getElementById("center-root").addEventListener("click", function() {
-      diagram.scale = 1
-      diagram.commandHandler.scrollToPart(diagram.findNodeForKey(1))
-    })
-
-    document.getElementById("collapse-all").addEventListener("click", function() {
-      diagram.nodes.each(function(n) {
-        n.wasTreeExpanded = false
-        n.collapseTree()
-      })
-      diagram.commandHandler.collapseTree(diagram.findNodeForKey(1))
-      diagram.commandHandler.zoomToFit()
-    })
+  
+    diagram.model = new go.TreeModel()
+  
+    const legend = 
+      $(go.Node, "Auto",
+        $(go.Shape,
+          { 
+            figure: "Rectangle",
+            width: 280,
+            height: 225,
+            fill: "rgb(34, 38, 57)",
+            stroke: "rgb(95, 82, 122)",
+            strokeWidth: 6,
+          }),
+        $(go.TextBlock, 
+          { 
+            text: "Right click on or hold down node +\n\
+                    click 'Remove Course' to remove course.\n\n\
+                    Click on a course node to open its\n\
+                    course reqs page.\n\n\
+                    'Ctrl + Z' to Undo or 'Ctrl + Y' to Redo.\n\n\
+                    Course Reqs is NOT a substitute for\n\
+                    academic advising. Not all information\n\
+                    is 100% correct or up-to-date.\n\
+                    Should double-check all information\n\
+                    on the official course calendar.",
+            font: "italic bold 10pt sans-serif",
+            stroke: "rgb(240, 245, 250)",
+            margin: 0
+          }))
+    diagram.add(legend)
     
-    document.getElementById("expand-all").addEventListener("click", function() {
-      diagram.nodes.each(function(n) { n.wasTreeExpanded = true })
-      diagram.findTreeRoots().each(function(n) { n.expandTree() })
-      diagram.commandHandler.zoomToFit()
-    })
-
     diagram.addDiagramListener("InitialLayoutCompleted", (e) => {
       e.diagram.findTreeRoots().each(function(r) { r.expandTree(3) })
     })
-  }, [nodes])
+
+    setDiagram(diagram)
+    setLegend(legend)
+
+    return diagram
+  }
 
   return (
       <div className="course-map">
@@ -230,7 +242,12 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
             Expand All
           </button>
         </div>
-        <div id="course-map-canvas" sx={{ variant: "containers.courseMap.canvas" }}></div> 
+        <ReactDiagram
+          divClassName='course-map-canvas'
+          initDiagram={initDiagram}
+          nodeDataArray={nodes}
+          onModelChange={() => {}}
+        />
       </div>
   ) 
 }
