@@ -37,7 +37,7 @@ const CoursePage: FC<{
             setLoading(false)
         }
         fetchCourseData()
-    }, [school])
+    }, [code, loading, school, subject, title])
 
     return (
         <>
