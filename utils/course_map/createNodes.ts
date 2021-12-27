@@ -90,8 +90,7 @@ const addNodes = (
         courseNodes.push({
             code: course.scoreOf,
             subject: "Score Of",
-            nodeName: `Score Of\n\
-        ${course.scoreOf}${course.metric === "percentage" ? "%" : ""}`,
+            nodeName: `Score Of\n${course.scoreOf}${course.metric === "percentage" ? "%" : ""}`,
             key: key,
             parent: parent,
             level: level,
