@@ -14,6 +14,7 @@ const CourseInfo: FC<{
     preRequisitesText?: any
     coRequisitesText?: any
     equivalenciesText?: any
+    allSubjects?: string[]
 }> = ({
     school, 
     subject, 
@@ -24,7 +25,8 @@ const CourseInfo: FC<{
     notes,
     preRequisitesText,
     coRequisitesText,
-    equivalenciesText
+    equivalenciesText,
+    allSubjects
 }) => {
     const parseReqText = (reqText: string): string => {
         reqText = reqText.replace("<br />", "")
