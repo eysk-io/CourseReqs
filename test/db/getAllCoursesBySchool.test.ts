@@ -1,10 +1,8 @@
-import { getAllCoursesBySchool } from "../../db/course"
+import { getAllCourseSubjectsBySchool } from "../../db/course"
 import School from "../../resources/school/school.model"
-import Course from "../../resources/course/course.model"
 import * as dbHandler from "../test-db.setup"
-import mongoose from "mongoose"
 
-describe("getAllCoursesBySchool", () => {
+describe("getAllCourseSubjectsBySchool", () => {
     beforeAll(async () => {
         await dbHandler.connect()
     })
@@ -18,71 +16,37 @@ describe("getAllCoursesBySchool", () => {
     })
 
     it("returns the correct courses no matter the argument's letter case", async () => {
-        const school = await School.create({ name: "UBC" })
-        const course = await Course.create({
-            subject: "CPSC",
-            code: 110,
-            school: school.name,
-            credits: "4",
-            title: "Computation, Programs, and Programming",
-            description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
-            preRequisites: [],
-            coRequisites: [],
-            equivalencies: [],
-            notes: "none"
+        const school = await School.create({
+            name: "UBC",
+            subjects: [
+                "http://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code=ADHE",
+                "http://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code=AFST",
+                "http://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code=AGEC"
+            ]
         })
-
         const schoolName = "uBc"
-        const result = await getAllCoursesBySchool(schoolName)
-        expect(result[0]._id.toString()).toBe(course._id.toString())
-        expect.assertions(1)
-    })
-
-    it("returns all courses by school with no pre- or co-reqs", async () => {
-        const school = await School.create({ name: "UBC" })
-        const course = await Course.create({
-            subject: "CPSC",
-            code: 110,
-            school: school.name,
-            credits: "4",
-            title: "Computation, Programs, and Programming",
-            description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
-            preRequisites: [],
-            coRequisites: [],
-            equivalencies: [],
-            notes: "none"
-        })
-
-        const schoolName = school.name
-        const result = await getAllCoursesBySchool(schoolName)
-        expect(result[0]._id.toString()).toBe(course._id.toString())
-        expect.assertions(1)
+        const result = await getAllCourseSubjectsBySchool(schoolName)
+        expect(result.name).toEqual("UBC")
+        expect(result.subjects).toEqual([
+            "http://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code=ADHE",
+            "http://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code=AFST",
+            "http://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code=AGEC"
+        ])
+        expect.assertions(2)
     })
 
     it("returns null if school not found", async () => {
-        await Course.create({
-            subject: "CPSC",
-            code: 110,
-            credits: "4",
-            title: "Computation, Programs, and Programming",
-            description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
-            school: new mongoose.Types.ObjectId(),
-            preRequisites: [],
-            coRequisites: [],
-            equivalencies: [],
-            notes: "none"
-        })
         const schoolName = "UBC"
-        const result = await getAllCoursesBySchool(schoolName)
+        const result = await getAllCourseSubjectsBySchool(schoolName)
         expect(result).toEqual(null)
         expect.assertions(1)
     })
 
     it("returns an empty list of courses if no courses are available for the school", async () => {
-        const school = await School.create({ name: "UBC" })
-        const schoolName = school.name
-        const result = await getAllCoursesBySchool(schoolName)
-        expect(result).toEqual([])
+        await School.create({ name: "UBC", subjects: [] })
+        const schoolName = "UBC"
+        const result = await getAllCourseSubjectsBySchool(schoolName)
+        expect(result.subjects).toEqual([])
         expect.assertions(1)
     })
 })

@@ -12,5 +12,12 @@ describe("School model", () => {
                 unique: true
             })
         })
+        test("subjects", () => {
+            const subjects = School.schema.obj.subjects
+            expect(subjects).toEqual({
+                type: [],
+                required: true,
+            })
+        })
     })
 })

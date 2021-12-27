@@ -2,21 +2,17 @@ import Course from "../resources/course/course.model"
 import School from "../resources/school/school.model"
 import getCourseHelper from "../utils/getCourseHelper"
 
-export const getAllCoursesBySchool = async (schoolName: string): Promise<any> => {
+export const getAllCourseSubjectsBySchool = async (schoolName: string): Promise<any> => {
     try {
-        const schoolDoc = await School
+        const doc = await School
             .findOne({
                 name: schoolName.toUpperCase()
             })
             .lean()
             .exec()
-        if (!schoolDoc) {
+        if (!doc) {
             return null
         }
-        const doc = await Course
-            .find({ school: schoolDoc.name })
-            .lean()
-            .exec()
         return JSON.parse(JSON.stringify(doc))
     } catch (e) {
         console.error(e)

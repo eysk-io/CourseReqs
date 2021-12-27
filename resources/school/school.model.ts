@@ -1,7 +1,8 @@
 import { Schema, model, models } from "mongoose"
 
 interface School {
-    name: string
+    name: string,
+    subjects: string[]
 }
 
 const schoolSchema = new Schema<School>({
@@ -11,6 +12,10 @@ const schoolSchema = new Schema<School>({
         trim: true,
         maxlength: 10,
         unique: true
+    },
+    subjects: {
+        type: [],
+        required: true
     }
 })
 
