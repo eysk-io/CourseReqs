@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --forceExit --detectOpenHandles  --silent"
+    "test": "set COURSE_REQS_URL=http://localhost:3000&& jest --forceExit --detectOpenHandles  --silent"
   },
   "dependencies": {
     "@theme-ui/presets": "^0.11.3",
