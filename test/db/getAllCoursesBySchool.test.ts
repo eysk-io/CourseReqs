@@ -16,7 +16,7 @@ describe("getAllCourseSubjectsBySchool", () => {
     })
 
     it("returns the correct courses no matter the argument's letter case", async () => {
-        const school = await School.create({
+        await School.create({
             name: "UBC",
             subjects: [
                 "http://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code=ADHE",
