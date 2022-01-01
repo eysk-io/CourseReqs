@@ -12,15 +12,21 @@ const CoursePage: FC<{
     code?: string;
     allSubjects?: string[];
 }> = ({ school, subject, code, allSubjects }) => {
+    const [courseInfo, setCourseInfo] = useState(
+        { 
+            data: {
+                credits: "",
+                title: "",
+                description: "",
+                notes: "",
+                preRequisitesText: "",
+                coRequisitesText: "",
+                equivalenciesText: "",
+                nodes: []
+            } 
+        }
+    )
     const [loading, setLoading] = useState(true)
-    const [title, setTitle] = useState("")
-    const [credits, setCredits] = useState("")
-    const [description, setDescription] = useState("")
-    const [notes, setNotes] = useState("")
-    const [nodes, setNodes] = useState([])
-    const [preRequisitesText, setPreRequisitesText] = useState("")
-    const [coRequisitesText, setCoRequisitesText] = useState("")
-    const [equivalenciesText, setEquivalenciesText] = useState("")
 
     useEffect(() => {
         const fetchCourseData = async () => {
@@ -28,18 +34,13 @@ const CoursePage: FC<{
             courseInfo = await courseInfo.json()
             courseInfo.data.nodes = []
             createNodes(courseInfo.data)
-            setNodes(courseInfo.data.nodes)
-            setTitle(courseInfo.data.title)
-            setCredits(courseInfo.data.credits)
-            setDescription(courseInfo.data.description)
-            setNotes(courseInfo.data.notes)
-            setPreRequisitesText(courseInfo.data.preRequisitesText)
-            setCoRequisitesText(courseInfo.data.coRequisitesText)
-            setEquivalenciesText(courseInfo.data.equivalenciesText)
+            setCourseInfo(courseInfo);
             setLoading(false)
         }
         fetchCourseData()
     }, [school, subject, code])
+
+    console.log(courseInfo)
     
     return (
         <>
@@ -55,16 +56,16 @@ const CoursePage: FC<{
                         school={school.toUpperCase()}
                         subject={subject.toUpperCase()}
                         code={code}
-                        credits={credits}
-                        title={title}
-                        description={description}
-                        notes={notes}
-                        preRequisitesText={preRequisitesText}
-                        coRequisitesText={coRequisitesText}
-                        equivalenciesText={equivalenciesText}
+                        credits={courseInfo.data.credits}
+                        title={courseInfo.data.title}
+                        description={courseInfo.data.description}
+                        notes={courseInfo.data.notes}
+                        preRequisitesText={courseInfo.data.preRequisitesText}
+                        coRequisitesText={courseInfo.data.coRequisitesText}
+                        equivalenciesText={courseInfo.data.equivalenciesText}
                         allSubjects={allSubjects}
                     />
-                    <CourseMap nodes={nodes}/>
+                    <CourseMap nodes={courseInfo.data.nodes}/>
                 </div>
             )}
         </>
