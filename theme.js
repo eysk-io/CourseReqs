@@ -45,7 +45,8 @@ const theme = {
                 fontSize: ["7px", "10px", "18px", "18px"],
                 fontWeight: "bold",
                 color: "rgb(95, 82, 122)",
-                cursor: "pointer"
+                cursor: "pointer",
+                "&:hover": { transform: "translateY(-0.25em)", transition: "0.2s" }
             }
         },
         page: {

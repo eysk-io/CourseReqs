@@ -196,46 +196,31 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           because of each getElementById(<button-id>) */}
           <button 
             id="remove-instructions" 
-            sx={{ 
-              variant: "containers.courseMap.button",
-              "&:hover": { transform: "translateY(-0.25em)", transition: "0.2s"} 
-            }}
+            sx={{ variant: "containers.courseMap.button" }}
           >
             Remove Instructions
           </button>
           <button 
             id="zoom-to-fit" 
-            sx={{ 
-              variant: "containers.courseMap.button",
-              "&:hover": { transform: "translateY(-0.25em)"} 
-            }}
+            sx={{ variant: "containers.courseMap.button" }}
           >
             Zoom to Fit
           </button>
           <button 
             id="center-root" 
-            sx={{ 
-              variant: "containers.courseMap.button",
-              "&:hover": { transform: "translateY(-0.25em)"} 
-            }}
+            sx={{ variant: "containers.courseMap.button" }}
           >
             Center on Root
           </button>
           <button 
             id="collapse-all" 
-            sx={{ 
-              variant: "containers.courseMap.button",
-              "&:hover": { transform: "translateY(-0.25em)"} 
-            }}
+            sx={{ variant: "containers.courseMap.button" }}
           >
             Collapse All
           </button>
           <button 
             id="expand-all"
-            sx={{ 
-              variant: "containers.courseMap.button",
-              "&:hover": { transform: "translateY(-0.25em)"} 
-            }}
+            sx={{ variant: "containers.courseMap.button" }}
           >
             Expand All
           </button>
