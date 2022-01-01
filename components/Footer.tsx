@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { FC } from "react"
+import { FC } from "react"
 import { jsx } from "theme-ui"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBug, faBook } from "@fortawesome/free-solid-svg-icons"

@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { FC, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { jsx } from "theme-ui"
 import * as go from "gojs"
 import { ReactDiagram } from "gojs-react"
