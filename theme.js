@@ -52,7 +52,7 @@ const theme = {
             },
             headers: {
                 textAlign: "center",
-                fontSize: ["20px", "30px", "30px", "40px"],
+                fontSize: ["16px", "21px", "21px", "32px"],
                 marginTop: 1,
                 marginBottom: 0,
             },
