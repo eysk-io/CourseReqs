@@ -5,6 +5,7 @@ import { getAllCourseSubjectsBySchool } from "../../../db/course"
 import createNodes from "../../../utils/course_map/createNodes"
 import CourseInfo from "../../../components/CourseInfo"
 import CourseMap from "../../../components/CourseMap"
+import Footer from "../../../components/Footer"
 
 const CoursePage: FC<{ 
     school?: string;
@@ -64,6 +65,7 @@ const CoursePage: FC<{
                         allSubjects={allSubjects}
                     />
                     <CourseMap nodes={courseInfo.data.nodes}/>
+                    <Footer />
                 </div>
             )}
         </>

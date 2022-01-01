@@ -85,6 +85,20 @@ const theme = {
             m: 0,
             mx: "auto",
         },
+        footer: {
+            backgroundColor: deep.colors.background,
+            color: deep.colors.text,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-around",
+            margin: "auto",
+            height: "80px",
+            fontSize: "18px",
+            fontWeight: "bold",
+            fontAwesomeIcon: {
+                marginRight: "5px"
+            }
+        }
     },
     styles: {
         ...deep.styles
