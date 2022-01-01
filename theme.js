@@ -50,7 +50,7 @@ const theme = {
                     fontSize: ["10px", "15px", "15px", "15px"],
                 }
             },
-            headers: {
+            title: {
                 textAlign: "center",
                 fontSize: ["16px", "21px", "21px", "32px"],
                 marginTop: 1,
