@@ -40,8 +40,6 @@ const CoursePage: FC<{
         fetchCourseData()
     }, [school, subject, code])
 
-    console.log(courseInfo)
-    
     return (
         <>
             {loading ? (
