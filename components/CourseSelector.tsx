@@ -78,7 +78,7 @@ const CourseSelector: FC<{
                     )}
                 </select>
                 <input 
-                    sx={{ variant: "containers.courseMap.button" }}
+                    sx={{ variant: "containers.courseInfo.button" }}
                     type="submit" 
                 />
             </form>

@@ -56,16 +56,6 @@ const theme = {
                 marginTop: 1,
                 marginBottom: 0,
             },
-        },
-        courseMap: {
-            buttonContainer: {
-                width: "90%",
-                margin: "auto",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: "25px"
-            },
             button: {
                 backgroundColor: "rgb(240, 245, 250)",
                 border: "4px solid rgb(95, 82, 122)",
@@ -77,6 +67,16 @@ const theme = {
                 color: "rgb(95, 82, 122)",
                 cursor: "pointer",
                 "&:hover": { transform: "translateY(-0.25em)", transition: "0.2s" }
+            }
+        },
+        courseMap: {
+            buttonContainer: {
+                width: "90%",
+                margin: "auto",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: "25px"
             }
         },
         page: {

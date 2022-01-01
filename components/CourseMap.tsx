@@ -196,31 +196,31 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
           because of each getElementById(<button-id>) */}
           <button 
             id="remove-instructions" 
-            sx={{ variant: "containers.courseMap.button" }}
+            sx={{ variant: "containers.courseInfo.button" }}
           >
             Remove Instructions
           </button>
           <button 
             id="zoom-to-fit" 
-            sx={{ variant: "containers.courseMap.button" }}
+            sx={{ variant: "containers.courseInfo.button" }}
           >
             Zoom to Fit
           </button>
           <button 
             id="center-root" 
-            sx={{ variant: "containers.courseMap.button" }}
+            sx={{ variant: "containers.courseInfo.button" }}
           >
             Center on Root
           </button>
           <button 
             id="collapse-all" 
-            sx={{ variant: "containers.courseMap.button" }}
+            sx={{ variant: "containers.courseInfo.button" }}
           >
             Collapse All
           </button>
           <button 
             id="expand-all"
-            sx={{ variant: "containers.courseMap.button" }}
+            sx={{ variant: "containers.courseInfo.button" }}
           >
             Expand All
           </button>
