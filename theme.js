@@ -43,7 +43,8 @@ const theme = {
                     padding: "6px",
                     paddingLeft: "0px",
                     paddingRight: "0px",
-                    borderColor: deep.colors.background,
+                    borderWidth: 0,
+                    maxWidth: "145px"
                 },
                 dropdownContent: {
                     font: "sans-serif",
