@@ -18,6 +18,36 @@ const theme = {
                     display: ["none", "block", "block", "block"],
                     textAlign: "left",
                     margin: 0,
+                },
+            },
+            courseSelector: {
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: ["20px", "30px", "30px", "40px"],
+                font: "sans-serif",
+                fontWeight: "bold",
+                height: "50px",
+                marginTop: "10px",
+                schoolTitle: {
+                    marginBottom: ["23px", "32px", "32px", "44px"]
+                },
+                dropdown: {
+                    font: "sans-serif",
+                    fontSize: ["20px", "30px", "30px", "40px"],
+                    fontWeight: "bold",
+                    backgroundColor: deep.colors.background,
+                    color: deep.colors.text,
+                    cursor: "pointer",
+                    margin: "4px",
+                    padding: "6px",
+                    paddingLeft: "0px",
+                    paddingRight: "0px",
+                    borderColor: deep.colors.background,
+                },
+                dropdownContent: {
+                    font: "sans-serif",
+                    fontSize: ["10px", "15px", "15px", "15px"],
                 }
             },
             headers: {
@@ -25,7 +55,7 @@ const theme = {
                 fontSize: ["20px", "30px", "30px", "40px"],
                 marginTop: 1,
                 marginBottom: 0,
-            }
+            },
         },
         courseMap: {
             buttonContainer: {
