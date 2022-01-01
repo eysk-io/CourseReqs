@@ -15,7 +15,6 @@ const theme = {
                 margin: 0,
                 marginTop: 2,
                 requisites: {
-                    display: ["none", "block", "block", "block"],
                     textAlign: "left",
                     margin: 0,
                 },
