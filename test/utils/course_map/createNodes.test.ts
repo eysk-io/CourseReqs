@@ -24,7 +24,6 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/${cpsc110.school}/${cpsc110.subject}/${cpsc110.code}`,
                     title: `${cpsc110.title} (${cpsc110.credits})`,
                     visible: true
                 }
@@ -54,7 +53,6 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/${econ210.school}/${econ210.subject}/${econ210.code}`,
                     title: `${econ210.title} (${econ210.credits})`,
                     visible: true
                 },
@@ -117,7 +115,6 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/${cpsc210.school}/${cpsc210.subject}/${cpsc210.code}`,
                     title: `${cpsc210.title} (${cpsc210.credits})`,
                     visible: true
                 },
@@ -213,7 +210,6 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/${math100.school}/${math100.subject}/${math100.code}`,
                     title: `${math100.title} (${math100.credits})`,
                     visible: true
                 },
@@ -327,7 +323,6 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/${math120.school}/${math120.subject}/${math120.code}`,
                     title: `${math120.title} (${math120.credits})`,
                     visible: true
                 },
@@ -478,7 +473,6 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/${advancedCreditEx.school}/${advancedCreditEx.subject}/${advancedCreditEx.code}`,
                     title: `${advancedCreditEx.title} (${advancedCreditEx.credits})`,
                     visible: true
                 },
