@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Course Reqs</title>
         <meta name="description" content="Course requisite api and visualization" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.svg" />
       </Head>
       <Component {...pageProps} />
     </ThemeProvider>
