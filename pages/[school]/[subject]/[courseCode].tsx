@@ -6,6 +6,7 @@ import createNodes from "../../../utils/course_map/createNodes"
 import CourseInfo from "../../../components/CourseComponents/CourseInfo"
 import CourseMap from "../../../components/CourseComponents/CourseMap"
 import Footer from "../../../components/Footer"
+import LoadingPage from "../../../components/LoadingPage"
 
 const CoursePage: FC<{ 
     school?: string;
@@ -44,7 +45,7 @@ const CoursePage: FC<{
     return (
         <>
             {loading ? (
-                <div>Loading</div>
+                <LoadingPage />
             ) : (
                 <div className={
                     `${school.toLowerCase()}_\

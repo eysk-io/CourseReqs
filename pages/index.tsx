@@ -6,6 +6,7 @@ import styles from "../styles/Home.module.css"
 import CourseSelector from "../components/CourseComponents/CourseSelector"
 import Footer from "../components/Footer"
 import Animation from "../components/AnimationPage/Animation"
+import LoadingPage from "../components/LoadingPage"
 
 export default function Home() {
   const [allSubjects, setAllSubjects] = useState([])
@@ -24,7 +25,7 @@ export default function Home() {
   return (
     <>
       {loading ? (
-            <div>Loading</div>
+            <LoadingPage />
           ) : (
             <div className={styles.container}>
               <h1>Pick your course below:</h1>

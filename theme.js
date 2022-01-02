@@ -85,6 +85,10 @@ const theme = {
             m: 0,
             mx: "auto",
         },
+        loadingPage: {
+            textAlign: "center",
+            margin: "auto"
+        },
         footer: {
             backgroundColor: deep.colors.background,
             color: deep.colors.text,
