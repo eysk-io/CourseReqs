@@ -1,7 +1,7 @@
 import Lottie from "lottie-react-with-react-17"
 import animations from "./animations/index";
 
-const HomePageAnimation = () => {
+const Animation = () => {
     const generateRandomAnimation = () => {
         const index = Math.floor(Math.random() * animations.length) ;
         return animations[index]
@@ -16,4 +16,4 @@ const HomePageAnimation = () => {
     )
 }
 
-export default HomePageAnimation
+export default Animation
