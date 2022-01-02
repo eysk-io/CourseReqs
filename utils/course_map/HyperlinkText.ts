@@ -1,4 +1,3 @@
-"use strict"
 /*
 *  Copyright (C) 1998-2021 by Northwoods Software Corporation. All Rights Reserved.
 */
@@ -36,6 +35,8 @@
 // define the visual tree for the "HyperlinkText", in the normal fashion for a Panel.
 
 // The result is either a TextBlock or a Panel.
+
+import * as go from "gojs"
 
 go.GraphObject.defineBuilder("HyperlinkText", function (args) {
     // the URL is required as the first argument, either a string or a side-effect-free function returning a string
@@ -100,7 +101,7 @@ go.GraphObject.defineBuilder("HyperlinkText", function (args) {
         }
         return tb
     } else {
-        function findTextBlock(obj) {
+        const findTextBlock = (obj) => {
             if (obj instanceof go.TextBlock) return obj
             if (obj instanceof go.Panel) {
                 var it = obj.elements
@@ -115,7 +116,7 @@ go.GraphObject.defineBuilder("HyperlinkText", function (args) {
             {
                 "_url": url,
                 cursor: "pointer",
-                mouseEnter: function (e, panel) {
+                mouseEnter: function (e, panel: any) {
                     var tb = findTextBlock(panel)
                     var u = panel._url
                     if (typeof u === "function") u = u(panel.findTemplateBinder())
@@ -131,3 +132,5 @@ go.GraphObject.defineBuilder("HyperlinkText", function (args) {
         )
     }
 })
+
+export { }

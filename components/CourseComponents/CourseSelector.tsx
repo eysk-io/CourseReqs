@@ -40,7 +40,7 @@ const CourseSelector: FC<{
         <div className="course-selector">
             <form 
                 sx={{ variant: "containers.courseInfo.courseSelector" }} 
-                action={`${process.env.COURSE_REQS_URL}/${school}/${selectedSubject}/${selectedCode}`} 
+                action={`${window.location.origin}/${school}/${selectedSubject}/${selectedCode}`} 
                 method="get"
             >
                 <p sx={{variant: "containers.courseInfo.courseSelector.schoolTitle"}}>UBC -</p>

@@ -180,7 +180,7 @@ const addNodes = (
             height: 75,
             strokeWidth: 8,
             font: "bold 24pt sans-serif",
-            url: `${process.env.COURSE_REQS_URL}/${course.school}/${course.subject}/${course.code}`,
+            url: `${window.location.origin}/${course.school}/${course.subject}/${course.code}`,
             title: `${course.title} (${course.credits})`,
             visible: true
         })

@@ -3,16 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "set COURSE_REQS_URL=http://localhost:3000&& next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
     "lint": "next lint",
     "test": "set COURSE_REQS_URL=http://localhost:3000&& jest --forceExit --detectOpenHandles  --silent"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^6.0.0-beta3",
     "@fortawesome/react-fontawesome": "^0.1.16",
+    "@theme-ui/css": "^0.13.0",
     "@theme-ui/presets": "^0.11.3",
     "@types/mongodb": "^4.0.7",
     "gojs": "^2.1.56",
@@ -38,5 +40,8 @@
     "mongodb-memory-server": "^7.4.3",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.3"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }

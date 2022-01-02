@@ -70,7 +70,7 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/${econ210.school}/${econ210.subject}/${econ101Code}`,
+                    url: `http://localhost/${econ210.school}/${econ210.subject}/${econ101Code}`,
                     title: `${econ101Title} (${econ101Credits})`,
                     visible: true
                 },
@@ -88,7 +88,7 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/${econ210.school}/${econ210.subject}/${econ102Code}`,
+                    url: `http://localhost/${econ210.school}/${econ210.subject}/${econ102Code}`,
                     title: `${econ102Title} (${econ102Credits})`,
                     visible: true
                 },
@@ -150,7 +150,7 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/UBC/CPSC/107`,
+                    url: `http://localhost/UBC/CPSC/107`,
                     title: `${cpsc107Title} (3)`,
                     visible: true
                 },
@@ -168,7 +168,7 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/UBC/CPSC/103`,
+                    url: `http://localhost/UBC/CPSC/103`,
                     title: `${cpsc103Title} (3)`,
                     visible: true
                 },
@@ -186,7 +186,7 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/UBC/CPSC/110`,
+                    url: `http://localhost/UBC/CPSC/110`,
                     title: `${cpsc110Title} (4)`,
                     visible: true
                 }
@@ -508,7 +508,7 @@ describe("createNode", () => {
                     height: 75,
                     strokeWidth: 8,
                     font: "bold 24pt sans-serif",
-                    url: `${process.env.COURSE_REQS_URL}/UBC/MATH/100`,
+                    url: `http://localhost/UBC/MATH/100`,
                     title: `${math100Title} (3)`,
                     visible: true
                 },
