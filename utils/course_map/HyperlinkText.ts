@@ -131,3 +131,5 @@ go.GraphObject.defineBuilder("HyperlinkText", function (args) {
         )
     }
 })
+
+export { }
