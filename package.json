@@ -1,6 +1,6 @@
 {
   "name": "course_reqs",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "set COURSE_REQS_URL=http://localhost:3000&& next dev",
