@@ -116,7 +116,7 @@ go.GraphObject.defineBuilder("HyperlinkText", function (args) {
             {
                 "_url": url,
                 cursor: "pointer",
-                mouseEnter: function (e, panel) {
+                mouseEnter: function (e, panel: any) {
                     var tb = findTextBlock(panel)
                     var u = panel._url
                     if (typeof u === "function") u = u(panel.findTemplateBinder())
