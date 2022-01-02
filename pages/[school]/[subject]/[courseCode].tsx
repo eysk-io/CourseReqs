@@ -3,8 +3,8 @@ import { GetServerSideProps } from "next"
 import { connectToDB } from "../../../db/connect"
 import { getAllCourseSubjectsBySchool } from "../../../db/course"
 import createNodes from "../../../utils/course_map/createNodes"
-import CourseInfo from "../../../components/CourseInfo"
-import CourseMap from "../../../components/CourseMap"
+import CourseInfo from "../../../components/CourseComponents/CourseInfo"
+import CourseMap from "../../../components/CourseComponents/CourseMap"
 import Footer from "../../../components/Footer"
 
 const CoursePage: FC<{ 

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { jsx } from "theme-ui"
 import styles from "../styles/Home.module.css"
-import CourseSelector from "../components/CourseSelector"
+import CourseSelector from "../components/CourseComponents/CourseSelector"
 import Footer from "../components/Footer"
 import Animation from "../components/AnimationPage/Animation"
 

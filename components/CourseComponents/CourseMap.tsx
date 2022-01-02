@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from "react"
 import { jsx } from "theme-ui"
 import * as go from "gojs"
 import { ReactDiagram } from "gojs-react"
-import "../utils/course_map/HyperlinkText"
+import "../../utils/course_map/HyperlinkText"
 
 const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
   const [legend, setLegend] = useState(new go.Node())
