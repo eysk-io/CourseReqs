@@ -5,7 +5,7 @@ import { jsx } from "theme-ui"
 import styles from "../styles/Home.module.css"
 import CourseSelector from "../components/CourseSelector"
 import Footer from "../components/Footer"
-import HomePageAnimation from "../components/HomePageAnimation/HomePageAnimation"
+import Animation from "../components/AnimationPage/Animation"
 
 export default function Home() {
   const [allSubjects, setAllSubjects] = useState([])
@@ -34,7 +34,7 @@ export default function Home() {
                 code={"313"}
                 subjectCourses={allSubjects}
               />
-              <HomePageAnimation />
+              <Animation />
               <div style={{"maxWidth": "800px", "width": "100%", "height": "100%"}}>
                 <Footer />
               </div>
