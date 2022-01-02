@@ -56,7 +56,6 @@ const CourseInfo: FC<{
             <p sx={{ variant: "containers.courseInfo.description" }}>
                 {description.replace("<em>", "").replace("</em>","")}
             </p>
-            <p>{notes ? notes : ""}</p>
             <em><p sx={{ variant: "containers.courseInfo.description.requisites" }}>
                 <b>Pre-requisites:</b> {preRequisitesText ? parseReqText(preRequisitesText) : "none"}
             </p></em>
@@ -65,6 +64,9 @@ const CourseInfo: FC<{
             </p></em>
             <em><p sx={{ variant: "containers.courseInfo.description.requisites" }}>
                 <b>Equivalencies:</b> {equivalenciesText ? parseReqText(equivalenciesText) : "none"}
+            </p></em>
+            <em><p sx={{ variant: "containers.courseInfo.description.requisites" }}>
+                <b>Note:</b> {notes ? notes : ""}
             </p></em>
         </div>
     )
