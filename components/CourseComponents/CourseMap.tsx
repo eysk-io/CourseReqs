@@ -122,7 +122,7 @@ const CourseMap: FC<{ nodes?: any }> = ({ nodes }) => {
               stroke: "rgb(95, 82, 122)"
             }),
           {
-            click: (e, obj) => {
+            click: (e, obj: any) => {
               let node = obj.part.adornedPart
               if (node !== null) {
                 diagram.startTransaction("remove course")
