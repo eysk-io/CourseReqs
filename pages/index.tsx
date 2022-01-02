@@ -16,7 +16,8 @@ export default function Home() {
 
   useEffect(() => {
     const fetchSubjectData = async () => {
-      let subjectsInfo: any = await fetch(`${process.env.COURSE_REQS_URL}/api/course/ubc`)
+      const baseUrl = window.location.origin
+      let subjectsInfo: any = await fetch(`${baseUrl}/api/course/ubc`)
       subjectsInfo = await subjectsInfo.json()
       setAllSubjects(subjectsInfo.data.subjects)
       const randomSubjectIdx = Math.floor(Math.random() * subjectsInfo.data.subjects.length)

@@ -32,7 +32,8 @@ const CoursePage: FC<{
 
     useEffect(() => {
         const fetchCourseData = async () => {
-            let courseInfo: any = await fetch(`${process.env.COURSE_REQS_URL}/api/course/${school}/${subject}/${code}`)
+            const baseUrl = window.location.origin
+            let courseInfo: any = await fetch(`${baseUrl}/api/course/${school}/${subject}/${code}`)
             courseInfo = await courseInfo.json()
             courseInfo.data.nodes = []
             createNodes(courseInfo.data)

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "set COURSE_REQS_URL=http://localhost:3000&& next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
     "lint": "next lint",
