@@ -10,6 +10,8 @@ import LoadingPage from "../components/LoadingPage"
 
 export default function Home() {
   const [allSubjects, setAllSubjects] = useState([])
+  const [randomSubject, setRandomSubject] = useState("ADHE")
+  const [randomCode, setRandomCode] = useState("313")
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -17,6 +19,12 @@ export default function Home() {
       let subjectsInfo: any = await fetch(`${process.env.COURSE_REQS_URL}/api/course/ubc`)
       subjectsInfo = await subjectsInfo.json()
       setAllSubjects(subjectsInfo.data.subjects)
+      const randomSubjectIdx = Math.floor(Math.random() * subjectsInfo.data.subjects.length)
+      const randomSubjectInfo = subjectsInfo.data.subjects[randomSubjectIdx]
+      const randomSubject = randomSubjectInfo.url.substring(64, 68).toUpperCase()
+      setRandomSubject(randomSubject)
+      const randomCodeIdx = Math.floor(Math.random() * randomSubjectInfo.codes.length)
+      setRandomCode(randomSubjectInfo.codes[randomCodeIdx])
       setLoading(false)
   }
   fetchSubjectData()
@@ -31,8 +39,8 @@ export default function Home() {
               <h1>Pick your course below:</h1>
               <CourseSelector 
                 school={"UBC"}
-                subject={"ADHE"}
-                code={"313"}
+                subject={randomSubject}
+                code={randomCode}
                 subjectCourses={allSubjects}
               />
               <Animation />
