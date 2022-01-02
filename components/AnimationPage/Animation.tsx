@@ -1,18 +1,26 @@
-import Lottie from "lottie-react-with-react-17"
+import { useEffect } from "react"
+import lottie from "lottie-web"
 import animations from "./animations/index";
 
 const Animation = () => {
+    useEffect(() => {
+        lottie.loadAnimation({
+            container: document.getElementById("animation"),
+            animationData: generateRandomAnimation()
+        })
+    }, [])
+
     const generateRandomAnimation = () => {
         const index = Math.floor(Math.random() * animations.length) ;
         return animations[index]
     }
 
     return (
-        <Lottie 
+        <div 
             style={{ "maxWidth": "748px", "margin": "auto" }}
-            className="home-page-animation" 
-            animationData={generateRandomAnimation()}
-        />
+            className="animation" 
+            id="animation"
+        ></div>
     )
 }
 
