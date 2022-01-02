@@ -7,7 +7,13 @@ const HomePageAnimation = () => {
         return animations[index]
     }
 
-    return <Lottie style={{"maxWidth": "748px"}}className="home-page-animation" animationData={generateRandomAnimation()} />
+    return (
+        <Lottie 
+            style={{ "maxWidth": "748px", "margin": "auto" }}
+            className="home-page-animation" 
+            animationData={generateRandomAnimation()}
+        />
+    )
 }
 
 export default HomePageAnimation
