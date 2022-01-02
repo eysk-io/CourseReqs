@@ -1,6 +1,11 @@
-import { useEffect, useState } from 'react'
-import styles from '../styles/Home.module.css'
-import CourseSelector from '../components/CourseSelector'
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import React, { useEffect, useState } from "react"
+import { jsx } from "theme-ui"
+import styles from "../styles/Home.module.css"
+import CourseSelector from "../components/CourseSelector"
+import Footer from "../components/Footer"
+import HomePageAnimation from "../components/HomePageAnimation/HomePageAnimation"
 
 export default function Home() {
   const [allSubjects, setAllSubjects] = useState([])
@@ -29,6 +34,10 @@ export default function Home() {
                 code={"313"}
                 subjectCourses={allSubjects}
               />
+              <HomePageAnimation />
+              <div style={{"maxWidth": "800px", "width": "100%", "height": "100%"}}>
+                <Footer />
+              </div>
             </div>
           )
         }
