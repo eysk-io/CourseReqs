@@ -65,9 +65,12 @@ const CourseInfo: FC<{
             <em><p sx={{ variant: "containers.courseInfo.description.requisites" }}>
                 <b>Equivalencies:</b> {equivalenciesText ? parseReqText(equivalenciesText) : "none"}
             </p></em>
-            <em><p sx={{ variant: "containers.courseInfo.description.requisites" }}>
-                <b>Note:</b> {notes ? notes : ""}
-            </p></em>
+            {notes ? 
+                <em><p sx={{ variant: "containers.courseInfo.description.requisites" }}>
+                    <b>Note: </b> {notes}
+                </p></em> :
+                <span></span>
+            }
         </div>
     )
 }
