@@ -7,7 +7,7 @@ const theme = {
             margin: "auto",
             p: 2,
             width: "75%",
-            maxWidth: "1024px",
+            maxWidth: "512px",
             textAlign: "center",
             description: {
                 display: ["none", "none", "none", "block"],
@@ -17,6 +17,7 @@ const theme = {
                 requisites: {
                     textAlign: "left",
                     margin: 0,
+                    fontSize: ["12px", "12px", "16px", "18px"]
                 },
             },
             courseSelector: {
@@ -54,7 +55,7 @@ const theme = {
                 textAlign: "center",
                 fontSize: ["16px", "21px", "21px", "32px"],
                 marginTop: 1,
-                marginBottom: 0,
+                marginBottom: 3,
             },
             button: {
                 backgroundColor: "rgb(240, 245, 250)",
