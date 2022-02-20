@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from "react"
 import { GetServerSideProps } from "next"
 import { connectToDB } from "../../../db/connect"
+import { addVisit } from "../../../db/addVisit"
 import { getAllCourseSubjectsBySchool } from "../../../db/course"
 import createNodes from "../../../utils/course_map/createNodes"
 import CourseInfo from "../../../components/CourseComponents/CourseInfo"
@@ -83,6 +84,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (typeof school === "string") {
         courseSubjects = await getAllCourseSubjectsBySchool(school)
     }
+
+    await addVisit()
+
     return { 
         props: {
             school: school,
