@@ -10,7 +10,6 @@ const CourseInfo: FC<{
     code?: any
     title?: any
     credits?: any
-    description?: any
     notes?: any
     preRequisitesText?: any
     coRequisitesText?: any
@@ -21,8 +20,7 @@ const CourseInfo: FC<{
     subject, 
     code, 
     title,
-    credits, 
-    description, 
+    credits,
     notes,
     preRequisitesText,
     coRequisitesText,
@@ -53,9 +51,6 @@ const CourseInfo: FC<{
                     {title} ({credits})
                 </a>
             </h2>
-            <p sx={{ variant: "containers.courseInfo.description" }}>
-                {description.replace("<em>", "").replace("</em>","")}
-            </p>
             <em><p sx={{ variant: "containers.courseInfo.description.requisites" }}>
                 <b>Pre-requisites:</b> {preRequisitesText ? parseReqText(preRequisitesText) : "none"}
             </p></em>

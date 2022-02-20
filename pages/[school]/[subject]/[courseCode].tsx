@@ -60,7 +60,6 @@ const CoursePage: FC<{
                         code={code}
                         credits={courseInfo.data.credits}
                         title={courseInfo.data.title}
-                        description={courseInfo.data.description}
                         notes={courseInfo.data.notes}
                         preRequisitesText={courseInfo.data.preRequisitesText}
                         coRequisitesText={courseInfo.data.coRequisitesText}
