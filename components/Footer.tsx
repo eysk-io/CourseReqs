@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { faBug, faBook } from "@fortawesome/free-solid-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
+import Link from 'next/link'
 
 const Footer: FC<{}> = () => {
     const faBugIcon = faBug as IconProp
@@ -18,10 +19,12 @@ const Footer: FC<{}> = () => {
             className="footer"
         >
             <div className="footer-report-a-bug">
-                <a target="_blank" rel="noreferrer" href="https://github.com/eyskim/CourseReqs">
-                    <FontAwesomeIcon icon={faBugIcon} style={{"marginRight": "5px"}}/>
-                    Report a Bug
-                </a>
+                <Link href="/report-a-bug" passHref> 
+                    <a>
+                        <FontAwesomeIcon icon={faBugIcon} style={{"marginRight": "5px"}}/>
+                        Report a Bug
+                    </a>
+                </Link>
             </div>
             <div className="footer-github">
                 <a target="_blank" rel="noreferrer" href="https://github.com/eyskim/CourseReqs">
