@@ -17,7 +17,7 @@ const theme = {
                 requisites: {
                     textAlign: "left",
                     margin: 0,
-                    fontSize: ["12px", "12px", "16px", "18px"]
+                    fontSize: ["10px", "10px", "14px", "16px"]
                 },
             },
             courseSelector: {
