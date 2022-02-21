@@ -17,7 +17,7 @@ const Animation = () => {
 
     return (
         <div 
-            style={{ "maxWidth": "748px", "margin": "auto" }}
+            style={{ "maxWidth": "564px", "margin": "auto" }}
             className="animation" 
             id="animation"
         ></div>
