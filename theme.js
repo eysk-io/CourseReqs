@@ -7,7 +7,7 @@ const theme = {
             margin: "auto",
             p: 2,
             width: "75%",
-            maxWidth: "512px",
+            maxWidth: "712px",
             textAlign: "center",
             description: {
                 display: ["none", "none", "none", "block"],
