@@ -12,6 +12,7 @@ const CourseSelector: FC<{
     const [selectedSubject, setSelectedSubject] = useState(subject)
     const [selectedCode, setSelectedCode] = useState(code)
     const [codes, setCodes] = useState([])
+    const [subjectOptions, setSubjectOptions] = useState([])
 
     const calendarUrl = "http://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code="
 
@@ -23,13 +24,14 @@ const CourseSelector: FC<{
             setCodes(subjectCodes[0].codes)
         if (code)
             setSelectedCode(code)
+        setSubjectOptions(subjectCourses.sort((a, b) => (a.url > b.url) ? 1 : -1))
     }, [school, subject, code, subjectCourses])
     
     const handleSelectCourse = e => {
         e.preventDefault()
         setSelectedSubject(e.target.value)
         const subjectUrl = `${calendarUrl}${e.target.value}`
-        const subjectCodes = subjectCourses.filter(eachSubject => eachSubject.url === subjectUrl)
+        const subjectCodes = subjectOptions.filter(eachSubject => eachSubject.url === subjectUrl)
         if (subjectCodes && subjectCodes[0]) {
             setCodes(subjectCodes[0].codes)
         }
@@ -51,7 +53,7 @@ const CourseSelector: FC<{
                     value={selectedSubject}
                     onChange={e => handleSelectCourse(e)}
                 >
-                    {subjectCourses.map((eachSubject, index) =>
+                    {subjectOptions.map((eachSubject, index) =>
                         <option 
                             sx={{ variant: "containers.courseInfo.courseSelector.dropdownContent" }}
                             key={index}
