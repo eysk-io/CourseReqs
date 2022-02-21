@@ -2,12 +2,15 @@ import { Schema, model, models } from "mongoose"
 
 interface Metric {
     name: string,
-    value: number
+    date: any
 }
 
 const metricSchema = new Schema<Metric>({
     name: String,
-    value: Number
+    date: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 export default models.Metric || model("Metric", metricSchema)
