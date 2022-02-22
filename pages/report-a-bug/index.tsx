@@ -68,6 +68,7 @@ const ReportABug: FC<{
                 /><br/>
                 <input type="submit"/>
             </form>
+            <Footer />
         </div>
     )
 }
