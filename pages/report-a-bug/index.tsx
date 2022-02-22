@@ -7,18 +7,18 @@ import styles from "../../styles/Home.module.css"
 import Footer from '../../components/Footer'
 
 const ReportABug: FC<{
-    authToken?: string
-}> = ({ authToken }) => {
+    authToken?: string,
+    repoUrl?: string
+}> = ({ authToken, repoUrl }) => {
     const [subject, setSubject] = useState("")
     const [code, setCode] = useState("")
     const [bug, setBug] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const url = "https://api.github.com/repos/eyskim/CourseReqs/issues"
 
         let xhr = new XMLHttpRequest()
-        xhr.open("POST", url)
+        xhr.open("POST", repoUrl)
 
         xhr.setRequestHeader(
             "Authorization",
@@ -90,7 +90,8 @@ export default ReportABug
 export const getServerSideProps: GetServerSideProps = async () => {
     return { 
         props: { 
-            authToken: process.env.COURSE_REQS_BUG_GITHUB_TOKEN
+            authToken: process.env.COURSE_REQS_BUG_GITHUB_TOKEN,
+            repoUrl: process.env.COURSE_REQS_ISSUES_URL
         }
     }
 }
