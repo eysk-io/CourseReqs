@@ -1,4 +1,5 @@
 import "../styles/globals.css"
+import "@fortawesome/fontawesome-svg-core/styles.css"
 import Head from "next/head"
 import { ThemeProvider } from "theme-ui"
 import theme from "../theme"

@@ -90,6 +90,13 @@ const theme = {
             textAlign: "center",
             margin: "auto"
         },
+        bugForm: {
+            textAlign: "center",
+            margin: "auto",
+            inputField: {
+                marginBottom: "10px"
+            }
+        },
         footer: {
             backgroundColor: deep.colors.background,
             color: deep.colors.text,
