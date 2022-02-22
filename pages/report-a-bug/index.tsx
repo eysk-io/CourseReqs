@@ -36,6 +36,16 @@ const ReportABug: FC<{
             "labels": ["bug"]
         }
 
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                const issueUrl = xhr.response.url
+                    .replace('api.', '')
+                    .replace('repos/', '')
+                window.location.replace(issueUrl)
+            } 
+        }
+        
+        xhr.responseType = "json"
         xhr.send(JSON.stringify(data))
     }
 
