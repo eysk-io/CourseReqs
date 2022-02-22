@@ -1,5 +1,10 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from "theme-ui"
 import { GetServerSideProps } from 'next'
 import { FC, useState } from 'react'
+import styles from "../../styles/Home.module.css"
+import Footer from '../../components/Footer'
 
 const ReportABug: FC<{
     authToken?: string
@@ -35,9 +40,9 @@ const ReportABug: FC<{
     }
 
     return (
-        <div className="report-a-bug">
+        <div className={styles.container}>
             <h1>Report a bug:</h1>
-            <form id="bug-form" onSubmit={handleSubmit}>
+            <form id="bug-form" onSubmit={handleSubmit} sx={{ variant: "containers.bugForm" }}>
                 <label htmlFor="course-subject">
                     Course Subject (or leave blank):
                 </label><br/>
@@ -46,6 +51,7 @@ const ReportABug: FC<{
                     id="course-subject" 
                     name="course-subject"
                     onChange={e => setSubject(e.target.value)}
+                    sx={{ variant: "containers.bugForm.inputField" }}
                 /><br/>
                 <label htmlFor="course-code">
                     Course Code (or leave blank):
@@ -55,6 +61,7 @@ const ReportABug: FC<{
                     id="course-code"
                     name="course-code"
                     onChange={e => setCode(e.target.value)}
+                    sx={{ variant: "containers.bugForm.inputField" }}
                 /><br/>
                 <label htmlFor="bug-form">
                     Please provide some information about the bug below:
@@ -66,9 +73,14 @@ const ReportABug: FC<{
                     name="bug-info"
                     onChange={e => setBug(e.target.value)}
                 /><br/>
-                <input type="submit"/>
+                <input
+                    sx={{ variant: "containers.courseInfo.button" }}
+                    type="submit"
+                />
             </form>
-            <Footer />
+            <div style={{"maxWidth": "800px", "width": "100%", "height": "100%"}}>
+                <Footer />
+            </div>
         </div>
     )
 }
