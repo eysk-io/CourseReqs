@@ -4,7 +4,7 @@ import { FC } from "react"
 import { jsx } from "theme-ui"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faBug, faBook } from "@fortawesome/free-solid-svg-icons"
+import { faBug, faBook, faHome } from "@fortawesome/free-solid-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import Link from 'next/link'
 
@@ -12,12 +12,21 @@ const Footer: FC<{}> = () => {
     const faBugIcon = faBug as IconProp
     const faBookIcon = faBook as IconProp
     const faGithubIcon = faGithub as IconProp
+    const faHomeIcon = faHome as IconProp
 
     return (
         <section 
             sx={{ variant: "containers.footer"}} 
             className="footer"
         >
+            <div className="footer-home">
+                <Link href="/" passHref> 
+                    <a>
+                        <FontAwesomeIcon icon={faHomeIcon} style={{"marginRight": "5px"}}/>
+                        Home
+                    </a>
+                </Link>
+            </div>
             <div className="footer-report-a-bug">
                 <Link href="/report-a-bug" passHref> 
                     <a>
