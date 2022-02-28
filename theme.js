@@ -97,6 +97,22 @@ const theme = {
                 marginBottom: "10px"
             }
         },
+        noPreReqs: {
+            textAlign: "center",
+            margin: "auto",
+            marginTop: "25px",
+            marginBottom: "25px",
+            course: {
+                height: "1000000px",
+                overflowY: "scroll",
+                fontSize: [12, 18, 25, 30],
+                width: "95%",
+                textAlign: "left",
+                li: {
+                    paddingLeft: 60
+                }
+            }
+        },
         footer: {
             backgroundColor: deep.colors.background,
             color: deep.colors.text,
