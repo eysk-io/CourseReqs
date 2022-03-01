@@ -23,17 +23,17 @@ const UpperDivNoReqs: FC<{
     
     return (
         <div className={styles.container}>
-            <h1 sx={{ variant: "containers.noPreReqs" }}>
+            <h1 sx={{ variant: "containers.noReqs" }}>
                 UBC Upper-Divs Without Pre or Co-Requisite Courses
             </h1>
-            <p style={{width: "75%"}}><strong>PLEASE NOTE:</strong><em> This is an aggregation based on an unofficial API. Please double-check each course on the UBC course calendar: <a href="https://www.calendar.ubc.ca/vancouver/courses.cfm?page=name" target="blank">https://www.calendar.ubc.ca/vancouver/courses.cfm?page=name</a>. As well, it will NOT consider all registration restrictions (ex. Registration for a course may only be restricted to specific faculties, year-standing, programs, etc.)</em></p>
-            <div sx={{ variant: "containers.noPreReqs.course" }}>
+            <p sx={{ variant: "containers.noReqs.message" }} style={{width: "75%"}}><strong>PLEASE NOTE:</strong><em> This is an aggregation based on an unofficial API. Please double-check each course on the UBC course calendar: <a href="https://www.calendar.ubc.ca/vancouver/courses.cfm?page=name" target="blank">https://www.calendar.ubc.ca/vancouver/courses.cfm?page=name</a>. As well, it will NOT consider all registration restrictions (ex. Registration for a course may only be restricted to specific faculties, year-standing, programs, etc.)</em></p>
+            <div sx={{ variant: "containers.noReqs.course" }}>
                 {allCourses.map((subj, index) => {
                     return (
                         <div key={index}>
                             <ul>{subj.subject}:</ul>
                             {subj.courses.map((course, index) => (
-                                <li key={index} sx={{ variant: "containers.noPreReqs.course.li" }}>
+                                <li key={index} sx={{ variant: "containers.noReqs.course.li" }}>
                                     <a
                                         key={index} 
                                         href={`https://www.calendar.ubc.ca/vancouver/courses.cfm?page=name&code=${subj.subject}#${course.code}`}
