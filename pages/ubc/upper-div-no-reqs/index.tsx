@@ -17,8 +17,6 @@ const UpperDivNoReqs: FC<{
     useEffect(() => {
         setAllCourses(allNoReqUppderDivCourses)
     }, [allNoReqUppderDivCourses])
-
-    console.log(allCourses)
     
     return (
         <div className={styles.container}>
