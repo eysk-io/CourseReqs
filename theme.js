@@ -97,15 +97,19 @@ const theme = {
                 marginBottom: "10px"
             }
         },
-        noPreReqs: {
+        noReqs: {
             textAlign: "center",
             margin: "auto",
-            marginTop: "25px",
-            marginBottom: "25px",
+            marginTop: "20px",
+            marginBottom: "20px",
+            fontSize: ["15px", "25px", "30px", "35px"],
+            message: {
+                fontSize: ["8px", "10px", "12px", "14px"]
+            },
             course: {
                 height: "1000000px",
                 overflowY: "scroll",
-                fontSize: [12, 18, 25, 30],
+                fontSize: ["10px", "18px", "25px", "30px"],
                 width: "95%",
                 textAlign: "left",
                 li: {
@@ -121,7 +125,7 @@ const theme = {
             justifyContent: "space-around",
             margin: "auto",
             height: "80px",
-            fontSize: "18px",
+            fontSize: ["8px", "12px", "14px", "18px"],
             fontWeight: "bold",
             fontAwesomeIcon: {
                 marginRight: "5px"
