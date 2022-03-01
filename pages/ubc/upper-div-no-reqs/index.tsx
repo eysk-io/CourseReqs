@@ -15,7 +15,10 @@ const UpperDivNoReqs: FC<{
     const [allCourses, setAllCourses] = useState([])
 
     useEffect(() => {
-        setAllCourses(allNoReqUppderDivCourses)
+        const sorted = allNoReqUppderDivCourses.sort(
+            (a, b) => (a.subject > b.subject) ? 1 : -1
+        )
+        setAllCourses(sorted)
     }, [allNoReqUppderDivCourses])
     
     return (
